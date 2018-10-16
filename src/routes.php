@@ -10,7 +10,13 @@ use App\Http\Middlewares\GuestMiddleware;
 |----------------------------------------------------
 */
 
-$app->get('/', 'HomeController:index')->setName('home');
+$app->get('/', 'HomeController:index')->setName('public.home');
+$app->get('/blog', 'HomeController:index')->setName('public.blog');
+$app->get('/project', 'HomeController:index')->setName('public.project');
+$app->get('/contact', 'HomeController:index')->setName('public.contact');
+$app->get('/about', 'HomeController:index')->setName('public.about');
+$app->get('/slide', 'HomeController:index')->setName('public.slide');
+$app->get('/discussion', 'HomeController:index')->setName('public.slide');
 
 $app->group('', function() {
 
