@@ -1,0 +1,119 @@
+<div class="modal fade" id="settingDialog" tabindex="-1" role="dialog" aria-labelledby="settingDialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <form action="{{ path_for('dashboard.setting.update') }}" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Setting [Site Details]</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="margin-bottom:20px">
+                    <div class="container-fluid">
+                        <div class="text-center" style="margin-bottom:50px;margin-top:20px" >
+                            <img class="mb-4 img-profile" src="{{ base_url() }}/assets/img/aasumitro.png" alt="" width="155" height="155">
+                            <h5>{{ auth.user.fullname }}</h5>
+                            <code>@{{ auth.user.username }}</code>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="facebookId">Facebook id</label>
+                                    <input type="text" class="form-control" name="facebook_id" placeholder="facebook"  id="facebookId" value="{{ setting.facebook }}">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="twitterId">Twitter id</label>
+                                    <input type="text" class="form-control" name="twitter_id" placeholder="twitter" id="twitterId" value="{{ setting.twitter }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="linkedInId">LinkedIn id</label>
+                                    <input type="text" class="form-control" name="linkedin_id" placeholder="linkedin" id="linkedInId" value="{{ setting.linkedin }}">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="githubId">Github id</label>
+                                    <input type="text" class="form-control" name="github_id" placeholder="github" id="githubId" value="{{ setting.github }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" name="email" placeholder="email" id="email" value="{{ setting.email }}">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input type="text" class="form-control" name="phone" placeholder="phone" id="phone" value="{{ setting.phone }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" class="form-control" name="address" placeholder="address" id="address" value="{{ setting.address }}">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="url">Site url</label>
+                                    <input type="text" class="form-control" name="site_url" placeholder="site url" id="url"  value="{{ setting.site_url }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="siteName">Site name</label>
+                                    <input type="text" class="form-control" name="site_name" placeholder="site name" id="siteName" value="{{ setting.site_name }}">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="siteDesc">Site description</label>
+                                    <input type="text" class="form-control" name="site_description" placeholder="site description" id="siteDesc" value="{{ setting.site_description }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="siteEmail">Site email</label>
+                                    <input type="text" class="form-control" name="site_email" placeholder="site email" id="siteEmail" value="{{ setting.site_email }}">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col md-6 col-lg-6">
+                                <fieldset class="form-group">
+                                    <div class="row">
+                                        <h5 class="col-form-label col-sm-4 pt-0"><code>MT MODE</code></h5>
+                                        <div class="col-sm-8" style="margin-top:30px">
+                                            <label class="switch">
+                                                <input type="checkbox" {{ setting.status == '1' ? 'checked' }} name="mt_status">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save all changes</button>
+                    {{ csrf.field | raw }}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

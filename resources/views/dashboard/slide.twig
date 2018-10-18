@@ -1,0 +1,40 @@
+{% extends "/template/dash.twig" %}
+{% block title %}Slide{% endblock %}
+{% block body_content %}
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>This is slides title</td>
+                        <td>This is slides description</td>
+                        <td>
+                            <a href="#" style="margin-right:10px"><span data-feather="eye"></a></span>
+                            <a href="#" style="margin-right:10px"><span data-feather="edit"></a></span>
+                            <a href="#" style="margin-right:10px"><span data-feather="trash-2"></a></span>
+                            <a href="#" style="margin-right:10px"><span data-feather="star"></a></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <a href="#" class="fab-circle" style="margin-right:10px">
+                <div class="fab-icon">
+                    <h1>+</h1>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Agus, Adhi, Sumitro, Profile, Personal Website, aasumitro">
+        <meta name="author" content="Agus Adhi Sumitro">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <title>@aasumitro | Back-Office[{% block title %}{% endblock %}]</title>
+
+        {# Fonts  #}
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        {# Favicon  #}
+        <link rel="icon" href="{{ base_url() }}/assets/img/favicon.png" type="image/x-icon">
+        {# Styles #}
+        <link rel="stylesheet" href="{{ base_url() }}/assets/css/dash.css"  type="text/css">
+        <link rel="stylesheet" href="{{ base_url() }}/assets/css/switch.css"  type="text/css">
+        {# Bootsrap #}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        {# Fontawesome #}
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+    </head>
+
+    <body>
+
+        {% include '/template/partials/dashboard-toolbar.twig' %}
+        <div class="container-fluid">
+            <div class="row">
+                {% include '/template/partials/dashboard-sidebar.twig' %}
+                {% block body_content %}{% endblock %}
+            </div>
+
+            {% include '/dashboard/dialog/dialog-logout.twig' %}
+            {% include '/dashboard/dialog/dialog-setting.twig' %}
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+         <!-- Icons -->
+        <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+        <script>
+        feather.replace()
+        </script>
+    </body>
+
+</html>

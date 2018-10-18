@@ -1,0 +1,79 @@
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link {{ menu_status == 'home' ? 'active' }}" href="{{ path_for('dashboard.home') }}">
+          <span data-feather="home"></span>
+          Home <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ menu_status == 'message' ? 'active' }}" href="{{ path_for('dashboard.message') }}">
+          <span data-feather="send"></span>
+          Message
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ menu_status == 'article' ? 'active' }}" href="{{ path_for('dashboard.article') }}">
+          <span data-feather="file-text"></span>
+          Article
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ menu_status == 'project' ? 'active' }}" href="{{ path_for('dashboard.project') }}">
+          <span data-feather="layers"></span>
+          Project
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ menu_status == 'slide' ? 'active' }}" href="{{ path_for('dashboard.slide') }}">
+          <span data-feather="bar-chart-2"></span>
+          Slide
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ menu_status == 'discussion' ? 'active' }}" href="{{ path_for('dashboard.discussion') }}">
+          <span data-feather="users"></span>
+          Discussion
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ menu_status == 'gallery' ? 'active' }}" href="{{ path_for('dashboard.gallery') }}">
+          <span data-feather="camera"></span>
+          Gallery
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ menu_status == 'category-tag' ? 'active' }}" href="{{ path_for('dashboard.category&tag') }}">
+          <span data-feather="filter"></span>
+          Category & Tag
+        </a>
+      </li>
+    </ul>
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>App</span>
+      <a class="d-flex align-items-center text-muted" href="#"> </a>
+    </h6>
+    <ul class="nav flex-column mb-2">
+      <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#settingDialog">
+          <span data-feather="settings"></span>
+          Setting
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutConfirm">
+          <span data-feather="log-out"></span>
+          Logout
+        </a>
+      </li>
+    </ul>
+
+    <div style="position:absolute;bottom:0%;text-align:center">
+        <p> <code>&lt;/&gt;</code>  with <code>&hearts;</code> by <a href="http://aasumitro.id" target="_blank">@aasumitro</a>
+        <br> PSproject <a href="http://github.com/aasumitro/aassite-v2">v2.0</a>
+        </p>
+    </div>
+  </div>
+</nav>

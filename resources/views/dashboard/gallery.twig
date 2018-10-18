@@ -1,0 +1,50 @@
+{% extends "/template/dash.twig" %}
+{% block title %}Media{% endblock %}
+{% block body_content %}
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div class="card-deck">
+                <div class="card">
+                    <img class="card-img-top" src="{{ base_url() }}/assets/img/prev.svg" alt="Card image cap">
+                    <div class="card-footer">
+                        <div class="row">
+
+                            <div class="col-6">
+                                Image title
+                            </div>
+
+                            <div class="col-6" style="text-align:right">
+                                <a href="#" style="margin-right:10px"><span data-feather="eye"></a></span>
+                                <a href="#" style="margin-right:10px"><span data-feather="edit"></a></span>
+                                <a href="#" style="margin-right:10px"><span data-feather="trash-2" data-toggle="modal" data-target="#deleteConfirm"></a></span>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal fade " id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Are you sure?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <a href="#" class="btn btn-danger">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="fab-circle" data-toggle="modal" data-target="#addImageToGallery" style="margin-right:10px">
+                <div class="fab-icon">
+                    <h1 data-toggle="modal" data-target="#addImageToGallery" >+</h1>
+                </div>
+            </a>
+            {% include '/dashboard/dialog/dialog-gallery-add.twig' %}
+        </div>
+    </main>
+
+{% endblock %}

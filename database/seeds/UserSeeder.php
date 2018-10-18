@@ -18,6 +18,7 @@ class UserSeeder extends AbstractSeed
         $user_seed = [
             [
                 'unique_id' => 'adXbw3jensZlsSur0fYkTIfpDPrvLgDK',
+                'fullname' => 'Agus Adhi Sumitro',
                 'username' => 'aasumitro',
                 'phone' => '+6282271115593',
                 'email' => 'aasumitro@gmail.com',
@@ -26,8 +27,29 @@ class UserSeeder extends AbstractSeed
             ],
         ];
 
+        $setting_seed = [
+            [
+                'facebook' => 'aasumitro.id',
+                'twitter' => 'aasumitro',
+                'linkedin' => 'aasumitro' ,
+                'github'=> 'aasumitro',
+                'email' => 'aasumitro@merahputih.id',
+                'phone' => '082271115593',
+                'address' => 'Manado, Sulawesi Utara.',
+                'site_url'=> 'https://aasumitro.id',
+                'site_name' => 'aasumitro',
+                'site_description' => 'Agus Adhi Sumitro Personal Site',
+                'site_email' => 'hello@aasumitro.id',
+                'status' => '0',
+            ],
+        ];
+
         $user = $this->table('users');
         $user->insert($user_seed)
+             ->save();
+
+        $setting = $this->table('settings');
+        $setting->insert($setting_seed)
              ->save();
 
     }

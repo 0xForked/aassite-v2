@@ -10,26 +10,60 @@ use App\Http\Middlewares\GuestMiddleware;
 |----------------------------------------------------
 */
 
-$app->get('/', 'HomeController:index')->setName('public.home');
-$app->get('/blog', 'HomeController:index')->setName('public.blog');
-$app->get('/project', 'HomeController:index')->setName('public.project');
-$app->get('/contact', 'HomeController:index')->setName('public.contact');
-$app->get('/about', 'HomeController:index')->setName('public.about');
-$app->get('/slide', 'HomeController:index')->setName('public.slide');
-$app->get('/discussion', 'HomeController:index')->setName('public.slide');
+$app->get('/', 'PublicController:index')->setName('public.home');
+
+$app->get('/blog', 'PublicController:blog')->setName('public.blog');
+$app->get('/blog/article/{slug}', 'PublicController:blogDetail')->setName('public.blog.detail');
+$app->get('/project', 'PublicController:project')->setName('public.project');
+$app->get('/project/{slug}', 'PublicController:projectDetail')->setName('public.project.detail');
+$app->get('/contact', 'PublicController:contact')->setName('public.contact');
+$app->get('/about', 'PublicController:about')->setName('public.about');
+$app->get('/slide', 'PublicController:slide')->setName('public.slide');
+$app->get('/discussion', 'PublicController:discussion')->setName('public.discussion');
 
 $app->group('', function() {
 
     $this->get('/login', 'AuthController:getSignIn')->setName('auth.signin');
     $this->post('/login', 'AuthController:postSignIn');
 
-    $this->get('/register', 'AuthController:getSignUp')->setName('auth.signup');
-    $this->post('/register', 'AuthController:postSignUp');
+    //$this->get('/register', 'AuthController:getSignUp')->setName('auth.signup');
+    //$this->post('/register', 'AuthController:postSignUp');
 
 })->add(new GuestMiddleware($container));
 
 
-$app->group('', function() {
+$app->group('/dashboard', function() {
+
+    $this->get('/home', 'DashController:getHome')->setName('dashboard.home');
+
+    $this->get('/message', 'DashController:getMessages')->setName('dashboard.message');
+    $this->get('/message/mark', 'MessageController:mark')->setName('dashboard.message.mark');
+    $this->get('/message/delete', 'MessageController:delete')->setName('dashboard.message.delete');
+
+
+
+    $this->get('/article', 'DashController:getArticles')->setName('dashboard.article');
+
+    $this->get('/project', 'DashController:getProjects')->setName('dashboard.project');
+
+    $this->get('/slide', 'DashController:getSlides')->setName('dashboard.slide');
+
+    $this->get('/discussion', 'DashController:getDiscussions')->setName('dashboard.discussion');
+
+    $this->get('/gallery', 'DashController:getGalleries')->setName('dashboard.gallery');
+
+
+    $this->get('/category-and-tag', 'DashController:getCategoryAndTag')
+    ->setName('dashboard.category&tag');
+    $this->post('/tag/create', 'TagCatController:createTag')
+    ->setName('dash.tag.create');
+    $this->post('/category/create', 'TagCatController:createCategory')
+    ->setName('dash.category.create');
+    $this->get('/category/delete', 'TagCatController:deleteCategory');
+    $this->get('/tag/delete', 'TagCatController:deleteTag');
+
+
+    $this->post('/setting', 'SettingController:update')->setName('dashboard.setting.update');
 
     $this->get('/logout', 'AuthController:getSignOut')->setName('auth.signout');
 

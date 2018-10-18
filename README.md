@@ -27,3 +27,9 @@ Build in with [Slim 3](https://slimframework.com)
 
         composer start
 
+### Penulisan
+
+    NamaKelas
+    namaFungsi
+    nama_variable
+    link-url

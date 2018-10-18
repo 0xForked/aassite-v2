@@ -1,0 +1,154 @@
+{% extends "/template/dash.twig" %}
+{% block title %}Categories and Tags{% endblock %}
+{% block body_content %}
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        {% include '/template/partials/flash.twig' %}
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Create category</h5>
+                            <form style="margin-top:20px" action="{{ path_for('dash.category.create') }}" method="post">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="categoryTitle" id="categoryTitle" placeholder="Title" required autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="categoryDesc" id="categoryDesc" placeholder="Description" required>
+                                </div>
+                                 <button type="submit" class="btn btn-primary " style="float:right">Create</button>
+                                 {{ csrf.field | raw }}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5>Category list ({{ category_count }})</h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for category in category_list %}
+                                        <tr>
+                                            <th scope="row">{{ loop.index }}</th>
+                                            <td>{{ category.title }}</td>
+                                            <td>{{ category.desc }}</td>
+                                            <td>
+                                                <a href="#" style="margin-right:10px"><span data-feather="eye"></a></span>
+                                                <a href="#" style="margin-right:10px"><span data-feather="trash-2" data-toggle="modal" data-target="#deleteCategoryConfirm{{ category.id }}"></a></span>
+                                            </td>
+                                            <td>
+                                                <div class="modal fade " id="deleteCategoryConfirm{{ category.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteCategoryConfirmLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-sm">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                Are you sure?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <a href="/dashboard/category/delete?id={{ category.id }}" class="btn btn-danger">Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% if category_pagination.needed %}
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination" style="justify-content: center;">
+                                        {% for i in 1..category_pagination.lastpage %}
+                                            <li class="page-item {% if i == category_pagination.page %}active{% endif %}"><a class="page-link" href="?cp={{ i }}">{{ i }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </nav>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6" style="margin-top:20px">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Create tag</h5>
+                            <form style="margin-top:20px" action="{{ path_for('dash.tag.create') }}" method="post">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="tagTitle" id="tagTitle" placeholder="Title" required autofocus>
+
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="tagDesc" id="tagDesc" placeholder="Description" required>
+                                </div>
+                                 <button type="submit" class="btn btn-primary " style="float:right">Create</button>
+                                 {{ csrf.field | raw }}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6" style="margin-top:20px">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5>Tag list ({{ tag_count }})</h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for tag in tag_list %}
+                                        <tr>
+                                            <th scope="row">{{ loop.index }}</th>
+                                            <td>{{ tag.title }}</td>
+                                            <td>{{ tag.desc }}</td>
+                                            <td>
+                                                <a href="#" style="margin-right:10px"><span data-feather="eye"></a></span>
+                                                <a href="#" style="margin-right:10px"><span data-feather="trash-2" data-toggle="modal" data-target="#deleteTagConfirm{{ tag.id }}"></a></span>
+                                            </td>
+                                            <td>
+                                                <div class="modal fade " id="deleteTagConfirm{{ tag.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteTagConfirmLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-sm">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                Are you sure?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <a href="/dashboard/tag/delete?id={{ tag.id }}" class="btn btn-danger">Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% if tag_pagination.needed %}
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination" style="justify-content: center;">
+                                        {% for i in 1..tag_pagination.lastpage %}
+                                            <li class="page-item {% if i == tag_pagination.page %}active{% endif %}"><a class="page-link" href="?tp={{ i }}">{{ i }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </nav>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

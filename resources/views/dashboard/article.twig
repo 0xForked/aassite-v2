@@ -1,0 +1,116 @@
+{% extends "/template/dash.twig" %}
+{% block title %}Article{% endblock %}
+{% block body_content %}
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Categories</th>
+                    <th scope="col">Tags</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>This is article title</td>
+                        <td>Cat 1, cat 2, cat 3</td>
+                        <td>Tag 1, tag 2, tag 3</td>
+                        <td><span class="badge badge-secondary">DRAFT</span></td>
+                        <td>
+                            <a href="/" target="_blank" style="margin-right:10px"><span data-feather="eye"></a></span>
+                            <a href="#" style="margin-right:10px"><span data-feather="edit"></a></span>
+                            <a href="#" style="margin-right:10px"><span data-feather="trash-2" data-toggle="modal" data-target="#deleteConfirm"></a></span>
+                            <a href="#" style="margin-right:10px"><span data-feather="star" data-toggle="modal" data-target="#publishConfirm"></a></span>
+                            <a href="#" style="margin-right:10px"><span data-feather="trending-up" data-toggle="modal" data-target="#featuredConfirm"></a></span>
+                        </td>
+                        <td>
+                            <div class="modal fade " id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            Are you sure?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <a href="#" class="btn btn-danger">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="modal fade " id="publishConfirm" tabindex="-1" role="dialog" aria-labelledby="publishConfirmLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            Are you sure?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <a href="#" class="btn btn-primary">Publish</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="modal fade " id="featuredConfirm" tabindex="-1" role="dialog" aria-labelledby="featuredConfirmLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            Are you sure?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <a href="#" class="btn btn-success">Featured</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>This is article title</td>
+                        <td>Cat 1, cat 2, cat 3</td>
+                        <td>Tag 1, tag 2, tag 3</td>
+                        <td><span class="badge badge-primary">PUBLISHED</span></td>
+                        <td>
+                            <a href="#" style="margin-right:10px"><span data-feather="eye"></a></span>
+                            <a href="#" style="margin-right:10px"><span data-feather="edit"></a></span>
+                            <a href="#" style="margin-right:10px"><span data-feather="trash-2"></a></span>
+                            <a href="#" style="margin-right:10px"><span data-feather="trending-up"></a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>This is article title</td>
+                        <td>Cat 1, cat 2, cat 3</td>
+                        <td>Tag 1, tag 2, tag 3</td>
+                        <td><span class="badge badge-danger">FEATURED</span></td>
+                        <td>
+                            <a href="#" style="margin-right:10px"><span data-feather="eye"></a></span>
+                            <a href="#" style="margin-right:10px"><span data-feather="edit"></a></span>
+                            <a href="#" style="margin-right:10px"><span data-feather="trash-2"></a></span>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+            <a href="#" class="fab-circle" style="margin-right:10px">
+                <div class="fab-icon">
+                    <h1>+</h1>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+{% endblock %}

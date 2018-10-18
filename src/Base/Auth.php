@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Auth;
+namespace App\Base;
 
 use App\Models\User;
 
@@ -25,7 +25,7 @@ class Auth
         $user =  User::where('email', $email)->first();
 
         if (!$user) {
-
+            return false;
         }
 
         if (password_verify($password, $user->password)) {
