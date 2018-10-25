@@ -33,3 +33,7 @@ Build in with [Slim 3](https://slimframework.com)
     namaFungsi
     nama_variable
     link-url
+
+### License
+
+aassite-v2 is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
