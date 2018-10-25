@@ -3,8 +3,9 @@
 {% block body_content %}
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <table class="table">
+        {% include '/template/partials/flash.twig' %}
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+            <table class="table animated fadeIn">
                 <thead>
                     <tr>
                     <th scope="col">#</th>
@@ -14,25 +15,34 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>This is slides title</td>
-                        <td>This is slides description</td>
-                        <td>
-                            <a href="#" style="margin-right:10px"><span data-feather="eye"></a></span>
-                            <a href="#" style="margin-right:10px"><span data-feather="edit"></a></span>
-                            <a href="#" style="margin-right:10px"><span data-feather="trash-2"></a></span>
-                            <a href="#" style="margin-right:10px"><span data-feather="star"></a></span>
-                        </td>
-                    </tr>
+                    {% for slide in slide_list  %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>{{ slide.title }}</td>
+                            <td>{{ slide.desc }}</td>
+                            <td>
+                                <a href="{{ slide.link }}" target="_blank" style="margin-right:10px"><span data-feather="trending-up"></a></span>
+                                <a href="#" style="margin-right:10px" data-toggle="modal" data-target="#slideEditDialog{{ slide.id }}"><span data-feather="edit" ></span></a>
+                                <a href="#{{ slide.id }}" style="margin-right:10px" data-toggle="modal" data-target="#slideDeleteConfirm{{ slide.id }}"><span data-feather="trash-2"></span></a>
+                            </td>
+                            <tr>
+                                {% include '/dashboard/dialog/dialog-slide-edit.twig' %}
+                            </tr>
+                            <tr>
+                                {% include '/dashboard/dialog/dialog-slide-delete.twig' %}
+                            </tr>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
 
-            <a href="#" class="fab-circle" style="margin-right:10px">
+            <a href="#" class="fab-circle animated fadeIn" style="margin-right:10px" data-toggle="modal" data-target="#slideAddDialog">
                 <div class="fab-icon">
                     <h1>+</h1>
                 </div>
             </a>
+
+            {% include '/dashboard/dialog/dialog-slide-add.twig' %}
 
         </div>
     </main>

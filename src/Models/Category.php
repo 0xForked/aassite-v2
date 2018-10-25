@@ -24,4 +24,9 @@ class Category extends Model
         return $this->belongsToMany("App\Models\Project");
     }
 
+    public function discussion()
+    {
+        return $this->belongsToMany("App\Models\Discussion");
+    }
+
 }

@@ -1,0 +1,68 @@
+<div class="modal fade" id="discussionAddDialog" tabindex="-1" role="dialog" aria-labelledby="discussionAddDialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <form action="{{ path_for('dashboard.discussion.create') }}" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Add new Discusion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="margin-bottom:20px">
+                    <div class="container-fluid">
+                        <div class="form-group">
+                            <label for="title"><b>Judul</b></label>
+                            <p for="title">Tuliskan judul yang merepresentasikan maksud dan tujuan anda!</p>
+                            <input type="text" class="form-control" name="titleDiscussion" placeholder="Judul" id="titleId" required autofocus>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="title"><b>Kategori</b></label>
+                                    <p for="title">Pilih kategori yang tepat, untuk mempermudah penyorotan!</p>
+                                    {# <select name="categoryDiscussion" class="custom-select custom-select mb-3">
+                                        <option selected>Pilih Kategori</option>
+                                        {% for category in category_list %}
+                                            <option value="{{ category.id }}">{{ category.title }}</option>
+                                        {% endfor %}
+                                    </select> #}
+
+                                    <select name="categoryDiscussion[]" class="selectpicker form-control" multiple data-live-search="true">
+                                        {% for category in category_list %}
+                                            <option value="{{ category.id }}">{{ category.title }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="title"><b>Tag</b></label>
+                                    <p for="title">Masukkan beberapa kata kunci, untuk mempermudah penyorotan! <i class="fa fa-info-circle" style="color:firebrick" data-toggle="tooltip" data-placement="top" title="Pisahkan dengan tanda koma (,)"></i></p>
+                                    <input type="text" class="form-control" name="tagDiscussion" placeholder="Tag" id="titleId" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="title"><b>Uraikan pertanyaan/maksud dan tujuan anda</b></label>
+                            <p for="title">Uraikan maksud dan tujuan anda pada bagian ini. Anda dapat menambahkan media, dan lainya untuk memperjelas maksud dan tujuan anda!</p>
+
+                            <div id="scrolling-container">
+                                <div id="quill-container">
+                                </div>
+                            </div>
+                            <input type="hidden" name="bodyDiscussion" id="bodyDiscussion" value="" />
+                            <input type="hidden" name="creatorDiscussion" id="creatorDiscussion" value="{{ auth.user.email }}" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button onclick="setDiscussionBody()" type="submit" class="btn btn-primary">Create</button>
+                    {{ csrf.field | raw }}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

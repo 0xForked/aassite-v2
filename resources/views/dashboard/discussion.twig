@@ -3,13 +3,13 @@
 {% block body_content %}
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <table class="table">
+        {% include '/template/partials/flash.twig' %}
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+            <table class="table animated fadeIn">
                 <thead>
                     <tr>
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
-                    <th scope="col">Body</th>
                     <th scope="col">Creator</th>
                     <th scope="col">Date Posted</th>
                     <th scope="col">Status</th>
@@ -17,29 +17,61 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>This is discussion example title</td>
-                        <td>This is discussion example body</td>
-                        <td>creator@domain.id</td>
-                        <td>28 Augs 2018, 15:55</td>
-                        <td>Closed, Featured</td>
-                        <td>
-                            <a href="#" style="margin-right:10px"><span data-feather="eye"></a></span>
-                            <a href="#" style="margin-right:10px"><span data-feather="trash-2"></a></span>
-                            <a href="#" style="margin-right:10px"><span data-feather="star"></a></span>
-                        </td>
-                    </tr>
+                    {% for discussion in discussion_list %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>{{ discussion.title }}</td>
+                            <td>{{ discussion.creator }}</td>
+                            <td>{{ discussion.created_at }}</td>
+                            {% if discussion.status == 0 %}
+                                <td><span style="color:gray">ON_CLOSED</span> </td>
+                            {% elseif discussion.status == 1 %}
+                                <td><span style="color:brown">ON_HOLD</span> </td>
+                            {% elseif discussion.status == 2 %}
+                                <td>
+                                    <a href="#" class="bg-success text-white" style="padding:5px" data-toggle="modal" data-target="#markClosedConfirm{{discussion.id}}">ON_PUBLISHED</a>
+                                </td>
+                            {% elseif discussion.status == 3 %}
+                                <td>
+                                    <a href="#" class="bg-primary text-white" style="padding:5px" data-toggle="modal" data-target="#markClosedConfirm{{discussion.id}}">ON_FEATURED</a>
+                                </td>
+                            {% endif %}
+                            <td>
+                                <a href="#" style="margin-right:10px"><span data-feather="eye"></span></a>
+                                <a href="#" style="margin-right:10px" data-toggle="modal" data-target="#deleteConfirm{{discussion.id}}"><span data-feather="trash-2"></span></a>
+                                {% if discussion.status != 3 %}
+                                    <a href="#" style="margin-right:10px" data-toggle="modal" data-target="#markImportantConfirm{{discussion.id}}"><span data-feather="star"></span></a>
+                                {% endif %}
+                            </td>
+                            <tr>
+                                {% include '/dashboard/dialog/dialog-discussion-delete.twig' %}
+                                {% include '/dashboard/dialog/dialog-discussion-mark-closed.twig' %}
+                                {% include '/dashboard/dialog/dialog-discussion-mark-important.twig' %}
+                            </tr>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
 
-            <a href="#" class="fab-circle" style="margin-right:10px">
+            <a href="#" class="fab-circle animated fadeIn" style="margin-right:10px" data-toggle="modal" data-target="#discussionAddDialog">
                 <div class="fab-icon">
                     <h1>+</h1>
                 </div>
             </a>
 
+            {% include '/dashboard/dialog/dialog-discussion-add.twig' %}
+
         </div>
+
+        {% if discussion_pagination.needed %}
+            <nav aria-label="Page navigation example animated fadeInUp">
+                <ul class="pagination" style="justify-content: center;">
+                    {% for i in 1..discussion_pagination.lastpage %}
+                        <li class="page-item {% if i == discussion_pagination.page %}active{% endif %}"><a class="page-link" href="?p={{ i }}">{{ i }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        {% endif %}
     </main>
 
 {% endblock %}

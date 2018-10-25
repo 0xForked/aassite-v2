@@ -38,3 +38,11 @@ $container['ArticleController'] = function ($container) {
     return new \App\Http\Controllers\Main\ArticleController($container);
 };
 
+$container['DiscussionController'] = function ($container) {
+    return new \App\Http\Controllers\Main\DiscussionController($container);
+};
+
+$container['SlideController'] = function ($container) {
+    return new \App\Http\Controllers\Main\SlideController($container);
+};
+

@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Tag;
 use App\Models\Category;
 use App\Models\Message;
+use App\Models\Discussion;
+use App\Models\Slide;
+use App\Models\Project;
+use App\Models\Article;
 
 class DashboardController extends Controller
 {
@@ -63,12 +67,28 @@ class DashboardController extends Controller
 
     public function getProjects($request, $response)
     {
+
         $setting = Controller::getSetting();
+
+        $page = ($request->getParam('p', 0) > 0) ? $request->getParam('p') : 1;
+
+        $limit = 15;
+
+        $skip = ($page - 1) * $limit;
+
+        $project = Project::take($limit)->skip($skip)->get();
+        $project_count = Project::all()->count();
 
         $data = [
             'menu_status' => 'project',
             'setting' => $setting,
-
+            'project_list' => $project,
+            'project_count' => $project_count,
+            'project_pagination'    => [
+                'needed'        => $project_count > $limit,
+                'page'          => $page,
+                'lastpage'      => (ceil($project_count / $limit) == 0 ? 1 : ceil($project_count / $limit)),
+            ],
         ];
 
         return $this->view->render($response, 'dashboard/project.twig', $data);
@@ -78,9 +98,25 @@ class DashboardController extends Controller
     {
         $setting = Controller::getSetting();
 
+        $page = ($request->getParam('p', 0) > 0) ? $request->getParam('p') : 1;
+
+        $limit = 15;
+
+        $skip = ($page - 1) * $limit;
+
+        $slide = Slide::take($limit)->skip($skip)->get();
+        $slide_count = Slide::all()->count();
+
         $data = [
             'menu_status' => 'slide',
             'setting' => $setting,
+            'slide_list' => $slide,
+            'slide_count' => $slide_count,
+            'slide_pagination' => [
+                'needed'    => $slide_count > $limit,
+                'page'      => $page,
+                'lastpage'  => (ceil($slide_count / $limit) == 0 ? 1 : ceil($slide_count / $limit)),
+            ],
         ];
 
         return $this->view->render($response, 'dashboard/slide.twig', $data);
@@ -90,9 +126,27 @@ class DashboardController extends Controller
     {
         $setting = Controller::getSetting();
 
+        $page = ($request->getParam('p', 0) > 0) ? $request->getParam('p') : 1;
+
+        $limit = 15;
+
+        $skip = ($page - 1) * $limit;
+
+        $discussion = Discussion::take($limit)->skip($skip)->get();
+        $discussion_count = Discussion::all()->count();
+        $category = Category::all();
+
         $data = [
             'menu_status' => 'discussion',
             'setting' => $setting,
+            'discussion_list' => $discussion,
+            'discussion_count' => $discussion_count,
+            'discussion_pagination'    => [
+                'needed'        => $discussion_count > $limit,
+                'page'          => $page,
+                'lastpage'      => (ceil($discussion_count / $limit) == 0 ? 1 : ceil($discussion_count / $limit)),
+            ],
+            'category_list' => $category
         ];
 
         return $this->view->render($response, 'dashboard/discussion.twig', $data);

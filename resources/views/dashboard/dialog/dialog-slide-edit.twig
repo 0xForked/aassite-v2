@@ -1,0 +1,35 @@
+<!-- Modal -->
+<div class="modal fade" id="slideEditDialog{{ slide.id }}" tabindex="-1" role="dialog" aria-labelledby="slideEditDialogLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form action="{{ path_for('dashboard.slide.update') }}" method="POST">
+            <div class="modal-header">
+                <h5 class="modal-title" id="slideEditDialogLabel">Update Slide ({{ slide.id }})</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="slideEditTitle">Berikan judul yang tepat</label>
+                    <input type="text" class="form-control" name="slideEditTitle" id="slideEditTitle" placeholder="Title" value="{{ slide.title }}" required autofocus >
+                </div>
+                <div class="form-group">
+                    <label for="slideEditDesc">Deskripsikan isi dari slide secara garis besar</label>
+                    <input type="text" class="form-control" id="slideEditDesc" name="slideEditDesc" placeholder="Description" value="{{ slide.desc }}"  required>
+                </div>
+                <div class="form-group">
+                    <label for="slideEditLink">Masukkan link external file slide <i>*jika ada</i></label>
+                    <input type="text" class="form-control" id="slideEditLink" name="slideEditLink" placeholder="Link slides" value="{{ slide.link }}"  required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <input type="hidden" name="slideEditId" value="{{ slide.id }}">
+                {{ csrf.field | raw }}
+            </div>
+        </form>
+    </div>
+  </div>
+</div>

@@ -3,8 +3,9 @@
 {% block body_content %}
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <table class="table">
+        {% include '/template/partials/flash.twig' %}
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+            <table class="table animated fadeIn" >
                 <thead>
                     <tr>
                     <th scope="col">#</th>
@@ -37,7 +38,7 @@
                             <a href="#" style="margin-right:10px"><span data-feather="star" data-toggle="modal" data-target="#publishConfirm"></a></span>
                             <a href="#" style="margin-right:10px"><span data-feather="trending-up" data-toggle="modal" data-target="#featuredConfirm"></a></span>
                         </td>
-                        <td>
+                        <tr>
                             <div class="modal fade " id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-sm">
                                     <div class="modal-content">
@@ -51,8 +52,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </td>
-                        <td>
+                        </tr>
+                        <tr>
                             <div class="modal fade " id="publishConfirm" tabindex="-1" role="dialog" aria-labelledby="publishConfirmLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-sm">
                                     <div class="modal-content">
@@ -66,8 +67,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </td>
-                        <td>
+                        </tr>
+                        <tr>
                             <div class="modal fade " id="featuredConfirm" tabindex="-1" role="dialog" aria-labelledby="featuredConfirmLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-sm">
                                     <div class="modal-content">
@@ -81,12 +82,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </td>
+                        </tr>
                     </tr>
                 </tbody>
             </table>
 
-            <a href="#" class="fab-circle" style="margin-right:10px">
+            <a href="#" class="fab-circle animated fadeIn" style="margin-right:10px">
                 <div class="fab-icon">
                     <h1>+</h1>
                 </div>

@@ -19,7 +19,7 @@ class MessageController extends Controller
     public function mark($request, $response)
     {
         $id = $request->getParam('id');
-        $mark = Message::where('id', $id)->update(['status' => 1]);
+        $message = Message::where('id', $id)->update(['status' => 1]);
 
         if (!$message) {
             $this->flash->addMessage('error', 'Failed mark Message!');

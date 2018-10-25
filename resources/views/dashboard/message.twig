@@ -3,8 +3,9 @@
 {% block body_content %}
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <table class="table">
+        {% include '/template/partials/flash.twig' %}
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+            <table class="table animated fadeIn">
                 <thead>
                     <tr>
                     <th scope="col">#</th>
@@ -25,50 +26,26 @@
                             <td>{{ message.title }}</td>
                             <td>{{ message.body }}</td>
                             {% if message.status == 0 %}
-                            <td>
-                                <a href="#" class="bg-primary text-white" style="padding:5px" data-toggle="modal" data-target="#markConfirm{{message.id}}">MARK REPLIED</a>
-                            </td>
+                                <td>
+                                    <a href="#" class="bg-primary text-white" style="padding:5px" data-toggle="modal" data-target="#markConfirm{{message.id}}">MARK REPLIED</a>
+                                </td>
                             {% else %}
                                 <td><span style="color:green">MESSAGE_REPLIED</span> </td>
                             {% endif %}
-                            <td><a href="#" data-toggle="modal" data-target="#deleteConfirm{{message.id}}"><span data-feather="trash-2"></a></span></td>
                             <td>
-                                <div class="modal fade " id="markConfirm{{message.id}}" tabindex="-1" role="dialog" aria-labelledby="markConfirmLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-sm">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                Are you sure?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <a href="/dashboard/message/mark?id={{message.id}}" class="btn btn-primary">Mark</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <a href="#" data-toggle="modal" data-target="#deleteConfirm{{message.id}}"><span data-feather="trash-2"></span></a>
                             </td>
-                            <td>
-                                <div class="modal fade " id="deleteConfirm{{message.id}}" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-sm">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                Are you sure?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <a href="/dashboard/message/delete?id={{message.id}}" class="btn btn-danger">Delete</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
+                            <tr>
+                                {% include '/dashboard/dialog/dialog-message-delete.twig' %}
+                                {% include '/dashboard/dialog/dialog-message-mark.twig' %}
+                            </tr>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
         {% if message_pagination.needed %}
-            <nav aria-label="Page navigation example">
+            <nav aria-label="Page navigation example animated fadeIn">
                 <ul class="pagination" style="justify-content: center;">
                     {% for i in 1..message_pagination.lastpage %}
                         <li class="page-item {% if i == message_pagination.page %}active{% endif %}"><a class="page-link" href="?p={{ i }}">{{ i }}</a></li>
