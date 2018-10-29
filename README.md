@@ -1,6 +1,6 @@
 # with-slim
 
-Build in with [Slim 3](https://slimframework.com)
+Build up [with-slim](https://github.com/aasumitro/with-slim) 
 
 ## Library
 
