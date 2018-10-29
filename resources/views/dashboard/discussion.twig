@@ -35,11 +35,13 @@
                                 <td>
                                     <a href="#" class="bg-primary text-white" style="padding:5px" data-toggle="modal" data-target="#markClosedConfirm{{discussion.id}}">ON_FEATURED</a>
                                 </td>
+                            {% elseif discussion.status == 4 %}
+                                <td><span style="color:gray">FEATURED_CLOSED</span> </td>
                             {% endif %}
                             <td>
                                 <a href="#" style="margin-right:10px"><span data-feather="eye"></span></a>
                                 <a href="#" style="margin-right:10px" data-toggle="modal" data-target="#deleteConfirm{{discussion.id}}"><span data-feather="trash-2"></span></a>
-                                {% if discussion.status != 3 %}
+                                {% if discussion.status != 3 and discussion.status != 4 %}
                                     <a href="#" style="margin-right:10px" data-toggle="modal" data-target="#markImportantConfirm{{discussion.id}}"><span data-feather="star"></span></a>
                                 {% endif %}
                             </td>

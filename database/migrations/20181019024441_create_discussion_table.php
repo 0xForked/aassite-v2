@@ -17,7 +17,7 @@ class CreateDiscussionTable extends AbstractMigration
               ->addColumn('title', 'string', ['limit' => 150])
               ->addColumn('body', 'string',  ['limit' => MysqlAdapter::TEXT_REGULAR])
               ->addColumn('status', 'integer',  ['limit' => MysqlAdapter::INT_TINY])
-              // 0 closed, 1 hold, 2 published, 3 important
+              // 0 closed, 1 hold, 2 published, 3 important, 4 important & closed
               ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP', 'null' => true])
               ->addColumn('updated_at', 'datetime')
               ->save();

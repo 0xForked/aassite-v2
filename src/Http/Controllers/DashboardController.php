@@ -135,6 +135,7 @@ class DashboardController extends Controller
         $discussion = Discussion::take($limit)->skip($skip)->get();
         $discussion_count = Discussion::all()->count();
         $category = Category::all();
+        $tag = Tag::all();
 
         $data = [
             'menu_status' => 'discussion',
@@ -146,7 +147,8 @@ class DashboardController extends Controller
                 'page'          => $page,
                 'lastpage'      => (ceil($discussion_count / $limit) == 0 ? 1 : ceil($discussion_count / $limit)),
             ],
-            'category_list' => $category
+            'category_list' => $category,
+            'tag_list' => $tag
         ];
 
         return $this->view->render($response, 'dashboard/discussion.twig', $data);

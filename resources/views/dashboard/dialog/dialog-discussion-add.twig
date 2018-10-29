@@ -20,7 +20,7 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="title"><b>Kategori</b></label>
-                                    <p for="title">Pilih kategori yang tepat, untuk mempermudah penyorotan!</p>
+                                    <p for="title">Pilih kategori yang tepat, untuk mempermudah penyorotan! <i class="fa fa-info-circle" style="color:firebrick" data-toggle="tooltip" data-placement="top" title="pilih category"></i></p>
                                     {# <select name="categoryDiscussion" class="custom-select custom-select mb-3">
                                         <option selected>Pilih Kategori</option>
                                         {% for category in category_list %}
@@ -39,8 +39,11 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="title"><b>Tag</b></label>
-                                    <p for="title">Masukkan beberapa kata kunci, untuk mempermudah penyorotan! <i class="fa fa-info-circle" style="color:firebrick" data-toggle="tooltip" data-placement="top" title="Pisahkan dengan tanda koma (,)"></i></p>
-                                    <input type="text" class="form-control" name="tagDiscussion" placeholder="Tag" id="titleId" required>
+                                    <p for="title">Masukkan beberapa kata kunci, untuk mempermudah penyorotan! <i class="fa fa-info-circle" style="color:firebrick" data-toggle="tooltip" data-placement="top" title="pilih tag"></i></p>
+                                    {# <input type="text" class="form-control" name="tagDiscussion" placeholder="Tag" id="titleId" required> #}
+
+                                    <input id="tagData" style="width:350px;" type="text"  name="tagDiscussion" placeholder="Tag" required/>
+                                    <div style="clear:both;"></div>
                                 </div>
                             </div>
                         </div>

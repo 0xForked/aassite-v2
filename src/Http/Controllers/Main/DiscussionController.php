@@ -4,22 +4,11 @@ namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
 use App\Models\Discussion;
-
+use App\Models\Tag;
 use Respect\Validation\Validator;
 
 class DiscussionController extends Controller
 {
-
-
-    public function getAll($request, $response)
-    {
-
-    }
-
-    public function getDetail($request, $response)
-    {
-
-    }
 
     public function createByAdmin($request, $response)
     {
@@ -34,16 +23,14 @@ class DiscussionController extends Controller
             return $response->withRedirect($this->router->pathFor('dashboard.discussion'));
         }
 
-
         $allPostVars = $request->getParsedBody();
         $title = $allPostVars['titleDiscussion'];
         $body = $allPostVars['bodyDiscussion'];
         $creator = $allPostVars['creatorDiscussion'];
-        $category = $allPostVars['categoryDiscussion'];
+        $categories = $allPostVars['categoryDiscussion'];
+        $tags = explode(",", str_replace(array('[',']'), '', $allPostVars['tagDiscussion']));
         $slug = Controller::getSlug($title);
         $status = 2;
-
-        // var_dump(); die();
 
         $data = [
             'creator' => $creator,
@@ -60,22 +47,16 @@ class DiscussionController extends Controller
             return $response->withRedirect($this->router->pathFor('dashboard.discussion'));
         }
 
+        foreach ($categories as $category) {
+            $discussion->category()->attach($category);
+        }
+
+        foreach ($tags as $tag) {
+            $discussion->tag()->attach($tag);
+        }
+
         $this->flash->addMessage('info', 'discussion created!');
         return $response->withRedirect($this->router->pathFor('dashboard.discussion'));
-    }
-
-    public function createByGuest($request, $response)
-    {
-        $allPostVars = $request->getParsedBody();
-        $title = $allPostVars['titleDiscussion'];
-        $body = $allPostVars['bodyDiscussion'];
-        $status = 1; // user must confirm by email to publish hes article
-        // do send email logic
-    }
-
-    public function update($request, $response)
-    {
-
     }
 
     public function delete($request, $response)
@@ -97,8 +78,6 @@ class DiscussionController extends Controller
         $id = $request->getParam('id');
         $status = ($request->getParam('status') == 'important') ? 3 : 0;
 
-        // var_dump($status); die();
-
         $discussion = Discussion::where('id', $id)->update(['status' => $status]);
 
         if (!$discussion) {
@@ -109,6 +88,21 @@ class DiscussionController extends Controller
         $this->flash->addMessage('info', 'Discussion marked!');
         return $response->withRedirect($this->router->pathFor('dashboard.discussion'));
     }
+
+    public function createByUser($request, $response)
+    {
+        $allPostVars = $request->getParsedBody();
+        $title = $allPostVars['titleDiscussion'];
+        $body = $allPostVars['bodyDiscussion'];
+        $status = 1; // user must confirm by email to publish hes article
+        // do send email logic
+    }
+
+    public function updateByUser($request, $response)
+    {
+
+    }
+
 
 
 }

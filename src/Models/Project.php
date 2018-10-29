@@ -24,12 +24,22 @@ class Project extends Model
 
     public function category()
     {
-        return $this->belongsToMany("App\Models\Category");
+        return $this->belongsToMany(
+            "App\Models\Category",
+            "category_project",
+            "project_id",
+            "category_id"
+        );
     }
 
     public function tag()
     {
-        return $this->belongsToMany("App\Models\Tag");
+        return $this->belongsToMany(
+            "App\Models\Tag",
+            "project_tag",
+            "project_id",
+            "tag_id"
+        );
     }
 
 }

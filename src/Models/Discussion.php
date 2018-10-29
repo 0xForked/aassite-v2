@@ -16,12 +16,22 @@ class Discussion extends Model
 
     public function category()
     {
-        return $this->belongsToMany("App\Models\Category");
+        return $this->belongsToMany(
+            "App\Models\Category",
+            "category_discussion",
+            "discussion_id",
+            "category_id"
+        );
     }
 
     public function tag()
     {
-        return $this->belongsToMany("App\Models\Tag");
+        return $this->belongsToMany(
+            "App\Models\Category",
+            "discussion_tag",
+            "discussion_id",
+            "tag_id"
+        );
     }
 
 }
