@@ -79,6 +79,9 @@ class DashboardController extends Controller
         $project = Project::take($limit)->skip($skip)->get();
         $project_count = Project::all()->count();
 
+        $category = Category::all();
+        $tag = Tag::all();
+
         $data = [
             'menu_status' => 'project',
             'setting' => $setting,
@@ -89,6 +92,8 @@ class DashboardController extends Controller
                 'page'          => $page,
                 'lastpage'      => (ceil($project_count / $limit) == 0 ? 1 : ceil($project_count / $limit)),
             ],
+            'category_list' => $category,
+            'tag_list' => $tag
         ];
 
         return $this->view->render($response, 'dashboard/project.twig', $data);
