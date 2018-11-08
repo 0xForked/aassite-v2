@@ -1,0 +1,13 @@
+<div class="modal fade " id="featuredConfirm{{ project.id }}" tabindex="-1" role="dialog" aria-labelledby="featuredConfirmLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                Are you sure?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a href="/dashboard/project/mark?id={{ project.id }}&status=hot" class="btn btn-success">Featured</a>
+            </div>
+        </div>
+    </div>
+</div>

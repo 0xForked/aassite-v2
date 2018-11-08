@@ -1,6 +1,6 @@
 # with-slim
 
-Build up [with-slim](https://github.com/aasumitro/with-slim) 
+Build up [with-slim](https://github.com/aasumitro/with-slim)
 
 ## Library
 
@@ -12,20 +12,26 @@ Build up [with-slim](https://github.com/aasumitro/with-slim)
 
 ### How To Use?
 
-    Run Migration
-        vendor/bin/phinx migrate -e [option]
-    Run Seed
-        vendor/bin/phinx seed:run -e [option]
+    Manual:
+        Copy .env.example to .env
+        Run Migration
+            vendor/bin/phinx migrate -e [option]
+        Run Seed
+            vendor/bin/phinx seed:run -e [option]
 
-    n-option = testing, development or production (phinx.yml)
+            n-option = testing, development or production (phinx.yml)
 
-    Install Libs
+        Install Libs
 
-        composer install
+            composer install
 
-    Run This Service
+        Run This Service
 
-        composer start
+            composer start
+
+    Auto:
+
+        Composer install-app
 
 ### Penulisan
 

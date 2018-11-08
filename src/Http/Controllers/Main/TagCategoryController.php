@@ -14,9 +14,9 @@ class TagCategoryController extends Controller
     public function createTag($request, $response)
     {
 
-        $allPostVars = $request->getParsedBody();
-        $title = $allPostVars['tagTitle'];
-        $desc = $allPostVars['tagDesc'];
+        $all_post_vars = $request->getParsedBody();
+        $title = $all_post_vars['tagTitle'];
+        $desc = $all_post_vars['tagDesc'];
         $slug = Controller::getSlug($title);
 
         $data = [
@@ -54,9 +54,9 @@ class TagCategoryController extends Controller
 
     public function createCategory($request, $response)
     {
-        $allPostVars = $request->getParsedBody();
-        $title = $allPostVars['categoryTitle'];
-        $desc = $allPostVars['categoryDesc'];
+        $all_post_vars = $request->getParsedBody();
+        $title = $all_post_vars['categoryTitle'];
+        $desc = $all_post_vars['categoryDesc'];
         $slug = Controller::getSlug($title);
 
         $data = [

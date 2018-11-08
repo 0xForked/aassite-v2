@@ -13,19 +13,19 @@ class SettingController extends Controller
     public function update($request, $response)
     {
 
-        $allPostVars = $request->getParsedBody();
-        $facebook = $allPostVars['facebook_id'];
-        $twitter = $allPostVars['twitter_id'];
-        $linkedin = $allPostVars['linkedin_id'];
-        $github = $allPostVars['github_id'];
-        $email = $allPostVars['email'];
-        $phone = $allPostVars['phone'];
-        $address = $allPostVars['address'];
-        $site_url = $allPostVars['site_url'];
-        $site_name = $allPostVars['site_name'];
-        $site_desc = $allPostVars['site_description'];
-        $site_email = $allPostVars['site_email'];
-        $mt_status = $allPostVars['mt_status']; // nilai null dng "on"
+        $all_post_vars = $request->getParsedBody();
+        $facebook = $all_post_vars['facebook_id'];
+        $twitter = $all_post_vars['twitter_id'];
+        $linkedin = $all_post_vars['linkedin_id'];
+        $github = $all_post_vars['github_id'];
+        $email = $all_post_vars['email'];
+        $phone = $all_post_vars['phone'];
+        $address = $all_post_vars['address'];
+        $site_url = $all_post_vars['site_url'];
+        $site_name = $all_post_vars['site_name'];
+        $site_desc = $all_post_vars['site_description'];
+        $site_email = $all_post_vars['site_email'];
+        $mt_status = $all_post_vars['mt_status']; // nilai null dng "on"
 
         $setting = Setting::where('id', 1)
                             ->update([

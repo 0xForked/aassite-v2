@@ -17,10 +17,10 @@ class SlideController extends Controller
 
     public function create($request, $response)
     {
-        $allPostVars = $request->getParsedBody();
-        $title = $allPostVars['slideAddTitle'];
-        $desc = $allPostVars['slideAddDesc'];
-        $link = $allPostVars['slideAddLink'];
+        $all_post_vars = $request->getParsedBody();
+        $title = $all_post_vars['slideAddTitle'];
+        $desc = $all_post_vars['slideAddDesc'];
+        $link = $all_post_vars['slideAddLink'];
         $status = 1;
         $data = [
             'title' => $title,
@@ -42,11 +42,11 @@ class SlideController extends Controller
 
     public function update($request, $response)
     {
-        $allPostVars = $request->getParsedBody();
-        $title = $allPostVars['slideEditTitle'];
-        $desc = $allPostVars['slideEditDesc'];
-        $link = $allPostVars['slideEditLink'];
-        $id = $allPostVars['slideEditId'];
+        $all_post_vars = $request->getParsedBody();
+        $title = $all_post_vars['slideEditTitle'];
+        $desc = $all_post_vars['slideEditDesc'];
+        $link = $all_post_vars['slideEditLink'];
+        $id = $all_post_vars['slideEditId'];
         $status = 1;
 
         $data = [

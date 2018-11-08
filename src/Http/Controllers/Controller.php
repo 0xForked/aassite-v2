@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Setting;
+use Slim\Http\UploadedFile;
 
 class Controller
 {
@@ -20,17 +21,17 @@ class Controller
         }
     }
 
-    public function generateKey($MaxSize = 32)
+    public function generateKey($max_size = 32)
     {
 
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $MaxSize; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        $characters_length = strlen($characters);
+        $random_string = '';
+        for ($i = 0; $i < $max_size; $i++) {
+            $random_string .= $characters[rand(0, $characters_length - 1)];
         }
 
-        return $randomString;
+        return $random_string;
 
     }
 
@@ -43,7 +44,7 @@ class Controller
         $text = preg_replace('~[^-\w]+~', '', $text);
         if (empty($text))
         {
-            return 'n-a';
+            return 'n-a-'.bin2hex(random_bytes(8));
         }
         return $text;
     }
@@ -53,4 +54,14 @@ class Controller
         return Setting::find(1);
     }
 
+    public function moveUploadedFile($directory, UploadedFile $uploaded_file)
+    {
+        $extension = pathinfo($uploaded_file->getClientFilename(), PATHINFO_EXTENSION);
+        $basename = bin2hex(random_bytes(8));
+        $filename = sprintf('%s.%0.8s', $basename, $extension);
+
+        $uploaded_file->moveTo($directory . DIRECTORY_SEPARATOR . $filename);
+
+        return $filename;
+    }
 }

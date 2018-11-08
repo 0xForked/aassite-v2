@@ -18,72 +18,52 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>This is article title</td>
-                        <td>Cat 1, cat 2, cat 3</td>
-                        <td>Tag 1, tag 2, tag 3</td>
-                        <td><span class="badge badge-secondary">DRAFT</span></td>
-                        <td>
-                            <a href="/" target="_blank" style="margin-right:10px"><span data-feather="github"/></a>
-                            <a href="/" target="_blank" style="margin-right:10px"><span data-feather="globe"/></a>
-                            <a href="/" target="_blank" style="margin-right:10px"><i class="fab fa-google-play"></i></a>
-                            <a href="/" target="_blank" style="margin-right:10px"><i class="fab fa-app-store-ios"></i></a>
+                    {% for project in project_list %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>{{ project.title }}</td>
+                            <td>Cat 1, cat 2, cat 3</td>
+                            <td>Tag 1, tag 2, tag 3</td>
+                            <td>
+                                {% if project.status == 0 %}
+                                    <span class="badge badge-secondary">DRAFT</span>
+                                {% elseif project.status == 1 %}
+                                    <span class="badge badge-primary">PUBLISH</span>
+                                {% elseif project.status == 2 %}
+                                    <span class="badge badge-danger">FEATURED</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if project.link_github != null %}
+                                    <a href="{{ project.link_github }}" target="_blank" style="margin-right:10px"><span data-feather="github"/></a>
+                                {% elseif project.link_url_web != null %}
+                                    <a href="{{ project.link_url_web }}" target="_blank" style="margin-right:10px"><span data-feather="globe"/></a>
+                                {% elseif project.link_store_google != null %}
+                                    <a href="{{ project.link_store_googl }}" target="_blank" style="margin-right:10px"><i class="fab fa-google-play"></i></a>
+                                {% elseif project.link_store_apple != null %}
+                                    <a href="{{ project.link_store_apple }}" target="_blank" style="margin-right:10px"><i class="fab fa-app-store-ios"></i></a>
+                                {% endif %}
 
-                        </td>
-                        <td>
-                            <a href="#" style="margin-right:10px"><span data-feather="eye"/></a>
-                            <a href="#" style="margin-right:10px"><span data-feather="edit"/></a>
-                            <a href="#" style="margin-right:10px"><span data-feather="trash-2" data-toggle="modal" data-target="#deleteConfirm"></span></a>
-                            <a href="#" style="margin-right:10px"><span data-feather="star" data-toggle="modal" data-target="#publishConfirm"></span></a>
-                            <a href="#" style="margin-right:10px"><span data-feather="trending-up" data-toggle="modal" data-target="#featuredConfirm"></span></a>
-                        </td>
-                        <tr>
-                            <div class="modal fade " id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            Are you sure?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <a href="#" class="btn btn-danger">Delete</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </td>
+                            <td>
+                                <a href="#" style="margin-right:10px"><span data-feather="eye"/></a>
+                                <a href="#" style="margin-right:10px"><span data-feather="edit" data-toggle="modal" data-target="#projectEditDialog{{ project.id }}"/></a>
+                                <a href="#" style="margin-right:10px"><span data-feather="trash-2" data-toggle="modal" data-target="#deleteConfirm{{ project.id }}"></span></a>
+                                {% if project.status != 2 %}
+                                    <a href="#" style="margin-right:10px"><span data-feather="star" data-toggle="modal" data-target="#featuredConfirm{{ project.id }}"></span></a>
+                                {% endif %}
+                                {% if project.status != 1 and project.status != 2 %}
+                                    <a href="#" style="margin-right:10px"><span data-feather="trending-up" data-toggle="modal" data-target="#publishConfirm{{ project.id }}"></span></a>
+                                {% endif %}
+                            </td>
+                            <tr>
+                                {% include '/dashboard/dialog/dialog-project-edit.twig' %}
+                                {% include '/dashboard/dialog/dialog-project-delete.twig' %}
+                                {% include '/dashboard/dialog/dialog-project-mark-featured.twig' %}
+                                {% include '/dashboard/dialog/dialog-project-mark-publish.twig' %}
+                            </tr>
                         </tr>
-                        <tr>
-                            <div class="modal fade " id="publishConfirm" tabindex="-1" role="dialog" aria-labelledby="publishConfirmLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            Are you sure?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <a href="#" class="btn btn-primary">Publish</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div class="modal fade " id="featuredConfirm" tabindex="-1" role="dialog" aria-labelledby="featuredConfirmLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            Are you sure?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <a href="#" class="btn btn-success">Featured</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </tr>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
 
@@ -94,7 +74,6 @@
             </a>
 
              {% include '/dashboard/dialog/dialog-project-add.twig' %}
-
 
         </div>
     </main>

@@ -9,7 +9,8 @@ class PublicController extends Controller
 
     public function index($request, $response)
     {
-        return $this->view->render($response, 'index.twig');
+        // return $this->view->render($response, 'index.twig');
+        var_dump(file_exists(base_path() . '/.env')); die();
     }
 
     public function projects($request, $response)

@@ -23,12 +23,12 @@ class DiscussionController extends Controller
             return $response->withRedirect($this->router->pathFor('dashboard.discussion'));
         }
 
-        $allPostVars = $request->getParsedBody();
-        $title = $allPostVars['titleDiscussion'];
-        $body = $allPostVars['bodyDiscussion'];
-        $creator = $allPostVars['creatorDiscussion'];
-        $categories = $allPostVars['categoryDiscussion'];
-        $tags = explode(",", str_replace(array('[',']'), '', $allPostVars['tagDiscussion']));
+        $all_post_vars = $request->getParsedBody();
+        $title = $all_post_vars['titleDiscussion'];
+        $body = $all_post_vars['bodyDiscussion'];
+        $creator = $all_post_vars['creatorDiscussion'];
+        $categories = $all_post_vars['categoryDiscussion'];
+        $tags = explode(",", str_replace(array('[',']'), '', $all_post_vars['tagDiscussion']));
         $slug = Controller::getSlug($title);
         $status = 2;
 
@@ -76,7 +76,16 @@ class DiscussionController extends Controller
     public function mark($request, $response)
     {
         $id = $request->getParam('id');
-        $status = ($request->getParam('status') == 'important') ? 3 : 0;
+        // $status = ($request->getParam('status') == 'important') ? 3 : 0;
+        $status_passed = $request->getParam('status');
+
+        if ($status_passed == "important") {
+            $status = 3;
+        } else if ($status_passed == "closed_important") {
+            $status = 4;
+        } else {
+            $status = 0;
+        }
 
         $discussion = Discussion::where('id', $id)->update(['status' => $status]);
 
@@ -91,9 +100,9 @@ class DiscussionController extends Controller
 
     public function createByUser($request, $response)
     {
-        $allPostVars = $request->getParsedBody();
-        $title = $allPostVars['titleDiscussion'];
-        $body = $allPostVars['bodyDiscussion'];
+        $all_post_vars = $request->getParsedBody();
+        $title = $all_post_vars['titleDiscussion'];
+        $body = $all_post_vars['bodyDiscussion'];
         $status = 1; // user must confirm by email to publish hes article
         // do send email logic
     }

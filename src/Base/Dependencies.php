@@ -44,10 +44,10 @@ use App\Http\Middlewares\Authentication as AuthMidd;
 
     $container['logger'] = function($c) {
         $logger = new Logger('logger');
-        $logDir = __DIR__ . ('/../../logs/app.log');
-        $logHandler = new StreamHandler($logDir, Logger::DEBUG);
-        $logCrossedHandler = new FingersCrossedHandler($logHandler, Logger::ERROR);
-        $logger->pushHandler($logCrossedHandler);
+        $log_dir = __DIR__ . ('/../../logs/app.log');
+        $log_handler = new StreamHandler($log_dir, Logger::DEBUG);
+        $log_crossed_handler = new FingersCrossedHandler($log_handler, Logger::ERROR);
+        $logger->pushHandler($log_crossed_handler);
         return $logger;
     };
 
@@ -131,3 +131,10 @@ use App\Http\Middlewares\Authentication as AuthMidd;
             return $container->view->render($response, '/error/404.twig');
         };
     };
+
+/*
+|----------------------------------------------------
+| Upload Files                                      |
+|----------------------------------------------------
+*/
+    $container['img_directory'] = __DIR__ . '/../../public/assets/img/';

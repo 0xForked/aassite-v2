@@ -33,7 +33,7 @@
                                 </td>
                             {% elseif discussion.status == 3 %}
                                 <td>
-                                    <a href="#" class="bg-primary text-white" style="padding:5px" data-toggle="modal" data-target="#markClosedConfirm{{discussion.id}}">ON_FEATURED</a>
+                                    <a href="#" class="bg-primary text-white" style="padding:5px" data-toggle="modal" data-target="#markClosedFeaturedConfirm{{discussion.id}}">ON_FEATURED</a>
                                 </td>
                             {% elseif discussion.status == 4 %}
                                 <td><span style="color:gray">FEATURED_CLOSED</span> </td>
@@ -48,6 +48,7 @@
                             <tr>
                                 {% include '/dashboard/dialog/dialog-discussion-delete.twig' %}
                                 {% include '/dashboard/dialog/dialog-discussion-mark-closed.twig' %}
+                                {% include '/dashboard/dialog/dialog-discussion-mark-closed-important.twig' %}
                                 {% include '/dashboard/dialog/dialog-discussion-mark-important.twig' %}
                             </tr>
                         </tr>

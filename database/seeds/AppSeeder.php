@@ -3,7 +3,7 @@
 
 use Phinx\Seed\AbstractSeed;
 
-class UserSeeder extends AbstractSeed
+class AppSeeder extends AbstractSeed
 {
     /**
      * Run Method.
@@ -44,13 +44,24 @@ class UserSeeder extends AbstractSeed
             ],
         ];
 
+        $category_seed = [
+            [
+                'title' => 'uncategory',
+                'slug' => 'uncategory',
+                'desc' => 'uncategory',
+            ]
+        ];
+
         $user = $this->table('users');
         $user->insert($user_seed)
              ->save();
 
         $setting = $this->table('settings');
         $setting->insert($setting_seed)
-             ->save();
+                ->save();
 
+        $category = $this->table('category');
+        $category->insert($category_seed)
+                 ->save();
     }
 }

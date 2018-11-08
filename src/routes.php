@@ -45,6 +45,13 @@ $app->group('/dashboard', function() {
     $this->get('/article', 'DashController:getArticles')->setName('dashboard.article');
 
     $this->get('/project', 'DashController:getProjects')->setName('dashboard.project');
+    $this->post('/project/create', 'ProjectController:create')->setName('dashboard.project.create');
+    $this->post('/project/update', 'ProjectController:update')->setName('dashboard.project.update');
+    $this->get('/project/delete', 'ProjectController:delete')->setName('dashboard.project.delete');
+    $this->get('/project/mark', 'ProjectController:mark')->setName('dashboard.project.mark');
+
+
+
 
     $this->get('/slide', 'DashController:getSlides')->setName('dashboard.slide');
     $this->post('/slide/create', 'SlideController:create')->setName('dashboard.slide.create');
