@@ -16,7 +16,7 @@ class CreateArticleTable extends AbstractMigration
               ->addColumn('slug', 'string', ['limit' => 150])
               ->addColumn('title', 'string', ['limit' => 150])
               ->addColumn('body', 'string',  ['limit' => MysqlAdapter::TEXT_REGULAR])
-              ->addColumn('image', 'string', ['limit' => 50])
+            //   ->addColumn('image', 'string', ['limit' => 50])
               ->addColumn('status', 'integer',  ['limit' => MysqlAdapter::INT_TINY])
               // 0 draft, 1 published, 2 featured
               ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP', 'null' => true])

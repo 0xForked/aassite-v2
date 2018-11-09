@@ -68,7 +68,8 @@ $app->group('/dashboard', function() {
 
 
     $this->get('/gallery', 'DashController:getGalleries')->setName('dashboard.gallery');
-
+    $this->post('/gallery/add', 'GalleryController:add')->setName('dashboard.gallery.add');
+    $this->get('/gallery/delete', 'GalleryController:delete')->setName('dashboard.gallery.delete');
 
     $this->get('/category-and-tag', 'DashController:getCategoryAndTag')
     ->setName('dashboard.category&tag');
@@ -78,7 +79,6 @@ $app->group('/dashboard', function() {
     ->setName('dash.category.create');
     $this->get('/category/delete', 'TagCatController:deleteCategory');
     $this->get('/tag/delete', 'TagCatController:deleteTag');
-
 
     $this->post('/setting', 'SettingController:update')->setName('dashboard.setting.update');
 

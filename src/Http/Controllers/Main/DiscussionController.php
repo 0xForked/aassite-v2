@@ -28,7 +28,8 @@ class DiscussionController extends Controller
         $body = $all_post_vars['bodyDiscussion'];
         $creator = $all_post_vars['creatorDiscussion'];
         $categories = $all_post_vars['categoryDiscussion'];
-        $tags = explode(",", str_replace(array('[',']'), '', $all_post_vars['tagDiscussion']));
+        $tags = $all_post_vars['tagDiscussion'];
+        // $tags = explode(",", str_replace(array('[',']'), '', $all_post_vars['tagDiscussion']));
         $slug = Controller::getSlug($title);
         $status = 2;
 

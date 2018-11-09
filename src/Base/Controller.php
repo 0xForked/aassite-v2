@@ -46,3 +46,7 @@ $container['SlideController'] = function ($container) {
     return new \App\Http\Controllers\Main\SlideController($container);
 };
 
+$container['GalleryController'] = function ($container) {
+    return new \App\Http\Controllers\Main\GalleryController($container);
+};
+

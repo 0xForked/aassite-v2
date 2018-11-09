@@ -21,7 +21,7 @@
                         <div class="form-group">
                             <label for="categoryProject"><b>Category</b></label>
                             <p for="categoryProject">Pilih kategori yang tepat, untuk mempermudah penyorotan! <i class="fa fa-info-circle" style="color:firebrick" data-toggle="tooltip" data-placement="top" title="pilih category"></i></p>
-                            <select name="categoryProject[]" class="selectpicker form-control" multiple data-live-search="true" required>
+                            <select name="categoryProject[]" class="selectpicker" multiple data-live-search="true"  data-width="100%">
                                 {% for category in category_list %}
                                     <option value="{{ category.id }}" {{ category.id == 1 ? 'selected' : '' }} >{{ category.title }}</option>
                                 {% endfor %}
@@ -32,8 +32,14 @@
                         <div class="form-group">
                             <label for="tagProject"><b>Tag</b></label>
                             <p for="tagProject">Masukkan beberapa kata kunci, untuk mempermudah penyorotan! <i class="fa fa-info-circle" style="color:firebrick" data-toggle="tooltip" data-placement="top" title="pilih tag"></i></p>
-                            <input id="tagData" style="width:350px;" type="text" name="tagProject" placeholder="Tag" required/>
-                            <div style="clear:both;"></div>
+                            {# <input id="tagData" style="width:350px;" type="text" name="tagProject" placeholder="Tag" required/>
+                            <div style="clear:both;"></div> #}
+
+                             <select name="tagProject[]" class="selectpicker" multiple data-selected-text-format="count > 3" data-live-search="true"  data-width="100%" data-actions-box="true">
+                                {% for tag in tag_list %}
+                                    <option value="{{ tag.id }}" {{ tag.id == 1 ? 'selected' : '' }}  data-content="<span class='badge badge-secondary'>{{ tag.title }}</span>">{{ tag.title }}</option>
+                                {% endfor %}
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -74,7 +80,7 @@
                         <p for="projectLogo">Tambahkan logo project <i>*jika ada</i></p>
                         <label for="projectLogo" class="text-center">
                             <input type="file" name="projectLogo" id="projectLogo" style="display:none;" onchange="readIMG01(this);"/>
-                            <img id="img01" name="img01" src="{{ base_url() }}/assets/img/add-img.svg"  class="img-thumbnail rounded" width="200px" height="200px"/>
+                            <img id="img01" name="img01" src="{{ base_url() }}/assets/img/add-img.svg"  class="img-thumbnail rounded" width="270px" height="270px"/>
                         </label>
                     </div>
                     <div class="col-6">

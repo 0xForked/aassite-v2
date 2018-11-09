@@ -52,6 +52,14 @@ class AppSeeder extends AbstractSeed
             ]
         ];
 
+        $tag_seed = [
+            [
+                'title' => 'untag',
+                'slug' => 'untag',
+                'desc' => 'untag',
+            ]
+        ];
+
         $user = $this->table('users');
         $user->insert($user_seed)
              ->save();
@@ -60,8 +68,12 @@ class AppSeeder extends AbstractSeed
         $setting->insert($setting_seed)
                 ->save();
 
-        $category = $this->table('category');
+        $category = $this->table('categories');
         $category->insert($category_seed)
                  ->save();
+
+        $tag = $this->table('tags');
+        $tag->insert($tag_seed)
+            ->save();
     }
 }

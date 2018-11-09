@@ -62,6 +62,11 @@ class Controller
 
         $uploaded_file->moveTo($directory . DIRECTORY_SEPARATOR . $filename);
 
-        return $filename;
+        $data = [
+            'name' => $filename,
+            'ext' => $extension
+        ];
+
+        return $data;
     }
 }

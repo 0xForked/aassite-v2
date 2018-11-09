@@ -35,4 +35,14 @@ class Article extends Model
         );
     }
 
+    public function gallery()
+    {
+        return $this->belongsToMany(
+            "App\Models\Gallery",
+            "article_gallery",
+            "article_id",
+            "gallery_id"
+        );
+    }
+
 }

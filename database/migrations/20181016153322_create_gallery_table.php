@@ -11,10 +11,10 @@ class CreateGalleryTable extends AbstractMigration
     public function up()
     {
         $galley = $this->table('galleries');
-        $galley->addColumn('title', 'string', ['limit' => 100, 'null' => true])
-              ->addColumn('folder', 'string', ['limit' => 100, 'null' => true])
-              ->addColumn('name', 'string', ['limit' => 100, 'null' => true])
-              ->save();
+        $galley->addColumn('name', 'string', ['limit' => 50, 'null' => true])
+                ->addColumn('folder', 'string', ['limit' => 50, 'null' => true])
+                ->addColumn('ext', 'string', ['limit' => 50, 'null' => true])
+                ->save();
     }
 
     /**

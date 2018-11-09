@@ -21,29 +21,27 @@
                                 <div class="form-group">
                                     <label for="title"><b>Kategori</b></label>
                                     <p for="title">Pilih kategori yang tepat, untuk mempermudah penyorotan! <i class="fa fa-info-circle" style="color:firebrick" data-toggle="tooltip" data-placement="top" title="pilih category"></i></p>
-                                    {# <select name="categoryDiscussion" class="custom-select custom-select mb-3">
-                                        <option selected>Pilih Kategori</option>
+                                    <select name="categoryDiscussion[]" class="selectpicker" multiple data-live-search="true" data-width="100%" >
                                         {% for category in category_list %}
-                                            <option value="{{ category.id }}">{{ category.title }}</option>
-                                        {% endfor %}
-                                    </select> #}
-
-                                    <select name="categoryDiscussion[]" class="selectpicker form-control" multiple data-live-search="true">
-                                        {% for category in category_list %}
-                                            <option value="{{ category.id }}">{{ category.title }}</option>
+                                            <option value="{{ category.id }}" {{ category.id == 1 ? 'selected' : '' }} >{{ category.title }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
-
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="title"><b>Tag</b></label>
                                     <p for="title">Masukkan beberapa kata kunci, untuk mempermudah penyorotan! <i class="fa fa-info-circle" style="color:firebrick" data-toggle="tooltip" data-placement="top" title="pilih tag"></i></p>
-                                    {# <input type="text" class="form-control" name="tagDiscussion" placeholder="Tag" id="titleId" required> #}
 
-                                    <input id="tagData" style="width:350px;" type="text"  name="tagDiscussion" placeholder="Tag" required/>
-                                    <div style="clear:both;"></div>
+                                    {# <input id="tagData" style="width:350px;" type="text"  name="tagDiscussion"/>
+                                    <div style="clear:both;"></div> #}
+
+                                    <select name="tagDiscussion[]" class="selectpicker" multiple data-selected-text-format="count > 3" data-live-search="true"  data-width="100%" data-actions-box="true">
+                                        {% for tag in tag_list %}
+                                            <option value="{{ tag.id }}" {{ tag.id == 1 ? 'selected' : '' }}  data-content="<span class='badge badge-secondary'>{{ tag.title }}</span>">{{ tag.title }}</option>
+                                        {% endfor %}
+                                    </select>
+
                                 </div>
                             </div>
                         </div>

@@ -10,6 +10,7 @@ use App\Models\Discussion;
 use App\Models\Slide;
 use App\Models\Project;
 use App\Models\Article;
+use App\Models\Gallery;
 
 class DashboardController extends Controller
 {
@@ -163,9 +164,25 @@ class DashboardController extends Controller
     {
         $setting = Controller::getSetting();
 
+        $page = ($request->getParam('p', 0) > 0) ? $request->getParam('p') : 1;
+
+        $limit = 12;
+
+        $skip = ($page - 1) * $limit;
+
+        $gallery = Gallery::take($limit)->skip($skip)->get();
+        $gallery_count = Gallery::all()->count();
+
         $data = [
             'menu_status' => 'gallery',
             'setting' => $setting,
+            'gallery_list' => $gallery,
+            'gallery_count' => $gallery_count,
+            'gallery_pagination'    => [
+                'needed'        => $gallery_count > $limit,
+                'page'          => $page,
+                'lastpage'      => (ceil($gallery_count / $limit) == 0 ? 1 : ceil($gallery_count / $limit)),
+            ],
         ];
 
         return $this->view->render($response, 'dashboard/gallery.twig', $data);

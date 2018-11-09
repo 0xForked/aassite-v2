@@ -137,4 +137,4 @@ use App\Http\Middlewares\Authentication as AuthMidd;
 | Upload Files                                      |
 |----------------------------------------------------
 */
-    $container['img_directory'] = __DIR__ . '/../../public/assets/img/';
+    $container['img_directory'] = __DIR__ . '/../../public/assets/img/upload/';

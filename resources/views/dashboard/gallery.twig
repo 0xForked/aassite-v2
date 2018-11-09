@@ -5,40 +5,30 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         {% include '/template/partials/flash.twig' %}
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-            <div class="card-deck">
-                <div class="card">
-                    <img class="card-img-top" src="{{ base_url() }}/assets/img/prev.svg" alt="Card image cap">
-                    <div class="card-footer">
-                        <div class="row">
+            {% for gallery in gallery_list  %}
+                <div class="card-deck">
+                    <div class="card">
+                        <img src="{{ base_url() }}/assets/img/upload/{{ gallery.name }}" alt="Card image cap" width="290px" height="180px">
+                        <div class="card-footer">
+                            <div class="row">
 
-                            <div class="col-6">
-                                Image title
+                                <div class="col-6"></div>
+
+                                <div class="col-6" style="text-align:right">
+                                    <a href="{{ base_url() }}/assets/img/upload/{{ gallery.name }}" style="margin-right:10px" target="_blank"><span data-feather="eye"></a></span>
+                                    <a href="#" style="margin-right:10px"><span data-feather="trash-2" data-toggle="modal" data-target="#deleteConfirm{{ gallery.id }}"></a></span>
+                                </div>
+
                             </div>
 
-                            <div class="col-6" style="text-align:right">
-                                <a href="#" style="margin-right:10px"><span data-feather="eye"></a></span>
-                                <a href="#" style="margin-right:10px"><span data-feather="edit"></a></span>
-                                <a href="#" style="margin-right:10px"><span data-feather="trash-2" data-toggle="modal" data-target="#deleteConfirm"></a></span>
-
-                            </div>
                         </div>
 
-                    </div>
-                    <div class="modal fade " id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-sm">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    Are you sure?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="#" class="btn btn-danger">Delete</a>
-                                </div>
-                            </div>
-                        </div>
+                        {% include '/dashboard/dialog/dialog-gallery-delete.twig' %}
+
                     </div>
                 </div>
-            </div>
+            {% endfor %}
+
             <a href="#" class="fab-circle animated fadeIn" data-toggle="modal" data-target="#addImageToGallery" style="margin-right:10px">
                 <div class="fab-icon text-center">
                     <h1 data-toggle="modal" data-target="#addImageToGallery" >+</h1>
@@ -46,6 +36,16 @@
             </a>
             {% include '/dashboard/dialog/dialog-gallery-add.twig' %}
         </div>
+
+        {% if gallery_pagination.needed %}
+            <nav aria-label="Page navigation example animated fadeIn">
+                <ul class="pagination" style="justify-content: center;">
+                    {% for i in 1..gallery_pagination.lastpage %}
+                        <li class="page-item {% if i == gallery_pagination.page %}active{% endif %}"><a class="page-link" href="?p={{ i }}">{{ i }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        {% endif %}
     </main>
 
 {% endblock %}

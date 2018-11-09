@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Category;
 use App\Models\Tag;
+use App\Models\Gallery;
 use Respect\Validation\Validator;
 
 class ProjectController extends Controller
@@ -29,7 +30,8 @@ class ProjectController extends Controller
         $slug =  Controller::getSlug($title);
         $description = $all_post_vars['descriptionProject'];
         $categories = $all_post_vars['categoryProject'];
-        $tags = explode(",", str_replace(array('[',']'), '', $all_post_vars['tagProject']));
+        $tags = $all_post_vars['tagProject'];
+        // $tags = explode(",", str_replace(array('[',']'), '', $all_post_vars['tagProject']));
         $github = $all_post_vars['githubLinkProject'];
         $web = $all_post_vars['webLinkProject'];
         $play_store = $all_post_vars['playStoreLinkProject'];
@@ -37,20 +39,30 @@ class ProjectController extends Controller
         $guide = $all_post_vars['userGuideLinkProject'];
         $status = $all_post_vars['statusProject'];
 
+        // if not from gallery
         $directory = $this->img_directory;
         $uploaded_image = $request->getUploadedFiles();
         $image_file = $uploaded_image['projectLogo'];
 
         if ($image_file->getError() === UPLOAD_ERR_OK) {
-            $image_name = Controller::moveUploadedFile($directory, $image_file);
+            $image = Controller::moveUploadedFile($directory, $image_file);
         }
+
+        $data = [
+            'name' => $image['name'],
+            'folder' => $directory,
+            'ext' => $image['ext'],
+        ];
+
+        $gallery = Gallery::create($data);
+        // if not from gallery
 
         $data = [
             'author' => $author,
             'title' => $title,
             'slug' => $slug,
             'desc' => $description,
-            'image' => $image_name,
+            // 'image' => $image['name'],
             'status' => $status,
             'link_store_google' => $play_store ?: null,
             'link_store_apple' => $app_store ?: null,
@@ -73,6 +85,8 @@ class ProjectController extends Controller
         foreach ($tags as $tag) {
             $project->tag()->attach($tag);
         }
+
+        $project->gallery()->attach($gallery->id);
 
         $this->flash->addMessage('info', 'project created!');
         return $response->withRedirect($this->router->pathFor('dashboard.project'));

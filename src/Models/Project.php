@@ -42,4 +42,14 @@ class Project extends Model
         );
     }
 
+    public function gallery()
+    {
+        return $this->belongsToMany(
+            "App\Models\Gallery",
+            "gallery_project",
+            "project_id",
+            "gallery_id"
+        );
+    }
+
 }
