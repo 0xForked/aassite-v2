@@ -38,24 +38,11 @@ class ProjectController extends Controller
         $app_store = $all_post_vars['appStoreLinkProject'];
         $guide = $all_post_vars['userGuideLinkProject'];
         $status = $all_post_vars['statusProject'];
+        $image_from_gallery = $all_post_vars['logoFromGallery'];
 
-        // if not from gallery
         $directory = $this->img_directory;
         $uploaded_image = $request->getUploadedFiles();
         $image_file = $uploaded_image['projectLogo'];
-
-        if ($image_file->getError() === UPLOAD_ERR_OK) {
-            $image = Controller::moveUploadedFile($directory, $image_file);
-        }
-
-        $data = [
-            'name' => $image['name'],
-            'folder' => $directory,
-            'ext' => $image['ext'],
-        ];
-
-        $gallery = Gallery::create($data);
-        // if not from gallery
 
         $data = [
             'author' => $author,
@@ -86,7 +73,18 @@ class ProjectController extends Controller
             $project->tag()->attach($tag);
         }
 
-        $project->gallery()->attach($gallery->id);
+        if ($image_file->getError() === UPLOAD_ERR_OK) {
+            $image = Controller::moveUploadedFile($directory, $image_file);
+            $data = [
+                'name' => $image['name'],
+                'folder' => $directory,
+                'ext' => $image['ext'],
+            ];
+            $gallery = Gallery::create($data);
+            $project->gallery()->attach($gallery->id);
+        } else {
+            $project->gallery()->attach($image_from_gallery);
+        }
 
         $this->flash->addMessage('info', 'project created!');
         return $response->withRedirect($this->router->pathFor('dashboard.project'));

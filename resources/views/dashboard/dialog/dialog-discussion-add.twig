@@ -21,7 +21,7 @@
                                 <div class="form-group">
                                     <label for="title"><b>Kategori</b></label>
                                     <p for="title">Pilih kategori yang tepat, untuk mempermudah penyorotan! <i class="fa fa-info-circle" style="color:firebrick" data-toggle="tooltip" data-placement="top" title="pilih category"></i></p>
-                                    <select name="categoryDiscussion[]" class="selectpicker" multiple data-live-search="true" data-width="100%" >
+                                    <select name="categoryDiscussion[]" class="selectpicker " multiple data-live-search="true" data-width="100%" >
                                         {% for category in category_list %}
                                             <option value="{{ category.id }}" {{ category.id == 1 ? 'selected' : '' }} >{{ category.title }}</option>
                                         {% endfor %}
