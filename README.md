@@ -9,10 +9,16 @@ Build up [with-slim](https://github.com/aasumitro/with-slim)
 3. [PHPMailer](https://github.com/PHPMailer/PHPMailer) - Mailler
 4. [Phinx](https://github.com/cakephp/phinx) - DB Migration
 5. [Monolog](https://github.com/Seldaek/monolog) - Logging For PHP
+6. [Validation](https://github.com/Respect/Validation) - Validation For PHP
+7. [PHPDotEnv](https://github.com/vlucas/phpdotenv) - Dot Env for PHP
+8. [Bootstrap](https://github.com/twbs/bootstrap)
+9. [Bootstrap Select](https://github.com/snapappointments/bootstrap-select)
+10. [Image Picker](https://github.com/rvera/image-picker)
 
 ### How To Use?
 
     Manual:
+
         Copy .env.example to .env
         Run Migration
             vendor/bin/phinx migrate -e [option]
