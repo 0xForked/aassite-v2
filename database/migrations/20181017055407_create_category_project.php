@@ -10,8 +10,8 @@ class CreateCategoryProject extends AbstractMigration
         $slide = $this->table('category_project');
         $slide->addColumn('project_id', 'integer', ['null' => true])
               ->addColumn('category_id', 'integer', ['null' => true])
-              ->addForeignKey('project_id', 'projects', 'id', ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION'])
-              ->addForeignKey('category_id', 'categories', 'id', ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION'])
+              ->addForeignKey('project_id', 'projects', 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
+              ->addForeignKey('category_id', 'categories', 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
               ->save();
     }
 

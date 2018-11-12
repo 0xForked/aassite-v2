@@ -89,11 +89,10 @@
                         </ul>
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade  show active" id="pills-gallery" role="tabpanel" aria-labelledby="pills-gallery-tab">
-                                <select class="image-picker show-html"  name="logoFromGallery" >
-                                    <option data-img-src='http://placekitten.com/220/200' value='1'>Cute Kitten 1</option>
-                                    <option data-img-src='http://placekitten.com/180/200' value='2'>Cute Kitten 2</option>
-                                    <option data-img-src='http://placekitten.com/130/200' value='3'>Cute Kitten 3</option>
-                                    <option data-img-src='http://placekitten.com/270/200' value='4'>Cute Kitten 4</option>
+                                <select class="image-picker show-html" style="display:none;" name="logoFromGallery" >
+                                    {% for gallery in gallery_list %}
+                                        <option data-img-src='{{ base_url() }}/assets/img/upload/{{ gallery.name }}' value='{{ gallery.id }}'>{{ gallery.name }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                             <div class="tab-pane fade text-center" id="pills-upload" role="tabpanel" aria-labelledby="pills-upload-tab">

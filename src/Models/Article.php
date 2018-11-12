@@ -19,9 +19,7 @@ class Article extends Model
     {
         return $this->belongsToMany(
             "App\Models\Category",
-            "article_category",
-            "article_id",
-            "category_id"
+            "article_category"
         );
     }
 
@@ -29,9 +27,7 @@ class Article extends Model
     {
         return $this->belongsToMany(
             "App\Models\Tag",
-            "article_tag",
-            "article_id",
-            "tag_id"
+            "article_tag"
         );
     }
 
@@ -39,9 +35,7 @@ class Article extends Model
     {
         return $this->belongsToMany(
             "App\Models\Gallery",
-            "article_gallery",
-            "article_id",
-            "gallery_id"
+            "article_gallery"
         );
     }
 

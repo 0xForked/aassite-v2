@@ -18,9 +18,7 @@ class Discussion extends Model
     {
         return $this->belongsToMany(
             "App\Models\Category",
-            "category_discussion",
-            "discussion_id",
-            "category_id"
+            "category_discussion"
         );
     }
 
@@ -28,9 +26,7 @@ class Discussion extends Model
     {
         return $this->belongsToMany(
             "App\Models\Category",
-            "discussion_tag",
-            "discussion_id",
-            "tag_id"
+            "discussion_tag"
         );
     }
 

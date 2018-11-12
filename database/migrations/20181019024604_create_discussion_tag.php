@@ -13,8 +13,8 @@ class CreateDiscussionTag extends AbstractMigration
         $slide = $this->table('discussion_tag');
         $slide->addColumn('discussion_id', 'integer', ['null' => true])
               ->addColumn('tag_id', 'integer', ['null' => true])
-              ->addForeignKey('discussion_id', 'discussions', 'id', ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION'])
-              ->addForeignKey('tag_id', 'tags', 'id', ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION'])
+              ->addForeignKey('discussion_id', 'discussions', 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
+              ->addForeignKey('tag_id', 'tags', 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
               ->save();
     }
 

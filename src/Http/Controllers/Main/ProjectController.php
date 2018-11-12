@@ -92,7 +92,52 @@ class ProjectController extends Controller
 
     public function update($request, $response)
     {
+        // $validation = $this->validator->validate($request, [
+        //     'titleProject' => Validator::notEmpty(),
+        //     'descriptionProject' => Validator::notEmpty(),
+        // ]);
 
+        // if ($validation->failed()) {
+        //     $this->flash->addMessage('error', 'Failed create project!');
+        //     return $response->withRedirect($this->router->pathFor('dashboard.project'));
+        // }
+
+        $all_post_vars = $request->getParsedBody();
+        // $id = $all_post_vars['id'];
+        // $author = $all_post_vars['author'];
+        // $title = $all_post_vars['titleProject'];
+        // $slug =  Controller::getSlug($title);
+        // $description = $all_post_vars['descriptionProject'];
+        $categories = $all_post_vars['categoryProject'];
+        $tags = $all_post_vars['tagProject'];
+        // // $tags = explode(",", str_replace(array('[',']'), '', $all_post_vars['tagProject']));
+        // $github = $all_post_vars['githubLinkProject'];
+        // $web = $all_post_vars['webLinkProject'];
+        // $play_store = $all_post_vars['playStoreLinkProject'];
+        // $app_store = $all_post_vars['appStoreLinkProject'];
+        // $guide = $all_post_vars['userGuideLinkProject'];
+        // $status = $all_post_vars['statusProject'];
+        $image_from_gallery = $all_post_vars['logoFromGallery'];
+
+        // $directory = $this->img_directory;
+        // $uploaded_image = $request->getUploadedFiles();
+        // $image_file = $uploaded_image['projectLogo'];
+
+        // $data = [
+        //     'author' => $author,
+        //     'title' => $title,
+        //     'slug' => $slug,
+        //     'desc' => $description,
+        //     // 'image' => $image['name'],
+        //     'status' => $status,
+        //     'link_store_google' => $play_store ?: null,
+        //     'link_store_apple' => $app_store ?: null,
+        //     'link_url_web' => $web ?: null,
+        //     'link_github' => $github ?: null,
+        //     'user_guide' => $guide ?: null,
+        // ];
+
+        var_dump($image_from_gallery); die();
     }
 
     public function delete($request, $response)

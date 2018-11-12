@@ -26,9 +26,7 @@ class Project extends Model
     {
         return $this->belongsToMany(
             "App\Models\Category",
-            "category_project",
-            "project_id",
-            "category_id"
+            "category_project"
         );
     }
 
@@ -36,9 +34,7 @@ class Project extends Model
     {
         return $this->belongsToMany(
             "App\Models\Tag",
-            "project_tag",
-            "project_id",
-            "tag_id"
+            "project_tag"
         );
     }
 
@@ -46,9 +42,7 @@ class Project extends Model
     {
         return $this->belongsToMany(
             "App\Models\Gallery",
-            "gallery_project",
-            "project_id",
-            "gallery_id"
+            "gallery_project"
         );
     }
 

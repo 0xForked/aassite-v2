@@ -18,9 +18,7 @@ class Tag extends Model
     {
         return $this->belongsToMany(
             "App\Models\Article",
-            "article_tag",
-            "article_id",
-            "tag_id"
+            "article_tag"
         );
     }
 
@@ -28,9 +26,7 @@ class Tag extends Model
     {
         return $this->belongsToMany(
             "App\Models\Project",
-            "project_tag",
-            "project_id",
-            "tag_id"
+            "project_tag"
         );
     }
 
@@ -38,9 +34,7 @@ class Tag extends Model
     {
         return $this->belongsToMany(
             "App\Models\Discussion",
-            "discussion_tag",
-            "discussion_id",
-            "tag_id"
+            "discussion_tag"
         );
     }
 

@@ -5,67 +5,84 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         {% include '/template/partials/flash.twig' %}
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-            <table class="table animated fadeIn" >
-                <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Categories</th>
-                    <th scope="col">Tags</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Links</th>
-                    <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for project in project_list %}
+            <form method="POST" style="width:100%" action="{{ path_for('dashboard.project.update') }}" enctype="multipart/form-data">
+                <table class="table animated fadeIn" >
+                    <thead>
                         <tr>
-                            <th scope="row">{{ loop.index }}</th>
-                            <td>{{ project.title }}</td>
-                            <td>Cat 1, cat 2, cat 3</td>
-                            <td>Tag 1, tag 2, tag 3</td>
-                            <td>
-                                {% if project.status == 0 %}
-                                    <span class="badge badge-secondary">DRAFT</span>
-                                {% elseif project.status == 1 %}
-                                    <span class="badge badge-primary">PUBLISH</span>
-                                {% elseif project.status == 2 %}
-                                    <span class="badge badge-danger">FEATURED</span>
-                                {% endif %}
-                            </td>
-                            <td>
-                                {% if project.link_github != null %}
-                                    <a href="{{ project.link_github }}" target="_blank" style="margin-right:10px"><span data-feather="github"/></a>
-                                {% elseif project.link_url_web != null %}
-                                    <a href="{{ project.link_url_web }}" target="_blank" style="margin-right:10px"><span data-feather="globe"/></a>
-                                {% elseif project.link_store_google != null %}
-                                    <a href="{{ project.link_store_googl }}" target="_blank" style="margin-right:10px"><i class="fab fa-google-play"></i></a>
-                                {% elseif project.link_store_apple != null %}
-                                    <a href="{{ project.link_store_apple }}" target="_blank" style="margin-right:10px"><i class="fab fa-app-store-ios"></i></a>
-                                {% endif %}
-
-                            </td>
-                            <td>
-                                <a href="#" style="margin-right:10px"><span data-feather="eye"/></a>
-                                <a href="#" style="margin-right:10px"><span data-feather="edit" data-toggle="modal" data-target="#projectEditDialog{{ project.id }}"/></a>
-                                <a href="#" style="margin-right:10px"><span data-feather="trash-2" data-toggle="modal" data-target="#deleteConfirm{{ project.id }}"></span></a>
-                                {% if project.status != 2 %}
-                                    <a href="#" style="margin-right:10px"><span data-feather="star" data-toggle="modal" data-target="#featuredConfirm{{ project.id }}"></span></a>
-                                {% endif %}
-                                {% if project.status != 1 and project.status != 2 %}
-                                    <a href="#" style="margin-right:10px"><span data-feather="trending-up" data-toggle="modal" data-target="#publishConfirm{{ project.id }}"></span></a>
-                                {% endif %}
-                            </td>
-                            <tr>
-                                {% include '/dashboard/dialog/dialog-project-edit.twig' %}
-                                {% include '/dashboard/dialog/dialog-project-delete.twig' %}
-                                {% include '/dashboard/dialog/dialog-project-mark-featured.twig' %}
-                                {% include '/dashboard/dialog/dialog-project-mark-publish.twig' %}
-                            </tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Categories</th>
+                        <th scope="col">Tags</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Links</th>
+                        <th scope="col">Action</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for project in project_list %}
+                            <tr>
+                                <th scope="row">{{ loop.index }}</th>
+                                <td>{{ project.title }}</td>
+                                <td>
+                                    {% for category_project_list in project.category  %}
+                                        <span class="badge badge-secondary">
+                                            {{ category_project_list.title }}
+                                        </span>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for tag_project_list in project.tag  %}
+                                        <span class="badge badge-secondary">
+                                            {{ tag_project_list.title }}
+                                        </span>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% if project.status == 0 %}
+                                        <span class="badge badge-secondary">DRAFT</span>
+                                    {% elseif project.status == 1 %}
+                                        <span class="badge badge-primary">PUBLISH</span>
+                                    {% elseif project.status == 2 %}
+                                        <span class="badge badge-danger">FEATURED</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if project.link_github != null %}
+                                        <a href="{{ project.link_github }}" target="_blank" style="margin-right:10px"><span data-feather="github"/></a>
+                                    {% endif %}
+                                    {% if project.link_url_web != null %}
+                                        <a href="{{ project.link_url_web }}" target="_blank" style="margin-right:10px"><span data-feather="globe"/></a>
+                                    {% endif %}
+                                    {% if project.link_store_google != null %}
+                                        <a href="{{ project.link_store_googl }}" target="_blank" style="margin-right:10px"><i class="fab fa-google-play"></i></a>
+                                    {% endif %}
+                                    {% if project.link_store_apple != null %}
+                                        <a href="{{ project.link_store_apple }}" target="_blank" style="margin-right:10px"><i class="fab fa-app-store-ios"></i></a>
+                                    {% endif %}
+
+                                </td>
+                                <td>
+                                    <a href="#" style="margin-right:10px"><span data-feather="eye"/></a>
+                                    <a href="#" style="margin-right:10px"><span data-feather="edit" data-toggle="modal" data-target="#projectEditDialog{{ project.id }}"/></a>
+                                    <a href="#" style="margin-right:10px"><span data-feather="trash-2" data-toggle="modal" data-target="#deleteConfirm{{ project.id }}"></span></a>
+                                    {% if project.status != 2 %}
+                                        <a href="#" style="margin-right:10px"><span data-feather="star" data-toggle="modal" data-target="#featuredConfirm{{ project.id }}"></span></a>
+                                    {% endif %}
+                                    {% if project.status != 1 and project.status != 2 %}
+                                        <a href="#" style="margin-right:10px"><span data-feather="trending-up" data-toggle="modal" data-target="#publishConfirm{{ project.id }}"></span></a>
+                                    {% endif %}
+                                </td>
+                                <tr>
+                                    {% include '/dashboard/dialog/dialog-project-edit.twig' %}
+                                    {% include '/dashboard/dialog/dialog-project-delete.twig' %}
+                                    {% include '/dashboard/dialog/dialog-project-mark-featured.twig' %}
+                                    {% include '/dashboard/dialog/dialog-project-mark-publish.twig' %}
+                                </tr>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </form>
 
             <a href="#" class="fab-circle animated fadeIn" style="margin-right:10px" data-toggle="modal" data-target="#projectAddDialog">
                 <div class="fab-icon">
@@ -73,7 +90,7 @@
                 </div>
             </a>
 
-             {% include '/dashboard/dialog/dialog-project-add.twig' %}
+            {% include '/dashboard/dialog/dialog-project-add.twig' %}
 
         </div>
     </main>

@@ -151,3 +151,21 @@ body {
   border-bottom-style: dotted;
   border-left-style: dotted;
 }
+
+.gallery-bg {
+    display: block;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 180px;
+    width: 250px;
+}
+
+.gallery-bg .gallery-tag-project {
+    margin: 10px 0 0 10px;
+}
+
+.gallery-bg .gallery-tag-article {
+    margin: 10px 0 0 0;
+}

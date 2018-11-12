@@ -77,11 +77,17 @@ class DashboardController extends Controller
 
         $skip = ($page - 1) * $limit;
 
-        $project = Project::take($limit)->skip($skip)->get();
+        $project = Project::with('category')
+                            ->with('tag')
+                            ->with('gallery')
+                            ->take($limit)
+                            ->skip($skip)
+                            ->get();
         $project_count = Project::all()->count();
-
+        // var_dump(json_encode($project)); die();
         $category = Category::all();
         $tag = Tag::all();
+        $gallery = Gallery::all();
 
         $data = [
             'menu_status' => 'project',
@@ -94,7 +100,8 @@ class DashboardController extends Controller
                 'lastpage'      => (ceil($project_count / $limit) == 0 ? 1 : ceil($project_count / $limit)),
             ],
             'category_list' => $category,
-            'tag_list' => $tag
+            'tag_list' => $tag,
+            'gallery_list' => $gallery,
         ];
 
         return $this->view->render($response, 'dashboard/project.twig', $data);
@@ -170,7 +177,10 @@ class DashboardController extends Controller
 
         $skip = ($page - 1) * $limit;
 
-        $gallery = Gallery::take($limit)->skip($skip)->get();
+        $gallery = Gallery::take($limit)
+                            ->skip($skip)
+                            ->withCount('project')
+                            ->get();
         $gallery_count = Gallery::all()->count();
 
         $data = [

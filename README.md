@@ -20,8 +20,10 @@ Build up [with-slim](https://github.com/aasumitro/with-slim)
     Manual:
 
         Copy .env.example to .env
+
         Run Migration
             vendor/bin/phinx migrate -e [option]
+
         Run Seed
             vendor/bin/phinx seed:run -e [option]
 

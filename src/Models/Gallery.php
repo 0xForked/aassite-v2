@@ -18,9 +18,7 @@ class Gallery extends Model
     {
         return $this->belongsToMany(
             "App\Models\Article",
-            "article_gallery",
-            "article_id",
-            "gallery_id"
+            "article_gallery"
         );
     }
 
@@ -28,9 +26,7 @@ class Gallery extends Model
     {
         return $this->belongsToMany(
             "App\Models\Project",
-            "gallery_project",
-            "project_id",
-            "gallery_id"
+            "gallery_project"
         );
     }
 

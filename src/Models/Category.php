@@ -18,9 +18,7 @@ class Category extends Model
     {
         return $this->belongsToMany(
             "App\Models\Article",
-            "article_category",
-            "article_id",
-            "category_id"
+            "article_category"
         );
     }
 
@@ -28,9 +26,7 @@ class Category extends Model
     {
         return $this->belongsToMany(
             "App\Models\Project",
-            "category_project",
-            "project_id",
-            "category_id"
+            "category_project"
         );
     }
 
@@ -38,9 +34,7 @@ class Category extends Model
     {
         return $this->belongsToMany(
             "App\Models\Discussion",
-            "category_discussion",
-            "discussion_id",
-            "category_id"
+            "category_discussion"
         );
     }
 

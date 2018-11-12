@@ -7,7 +7,7 @@ class OldInputMiddleware extends Middleware
 
     public function __invoke($request, $response, $next)
     {
-        if ($_SESSION['old']) {
+        if (isset($_SESSION['old'])) {
             $this->container
                 ->view
                 ->getEnvironment()

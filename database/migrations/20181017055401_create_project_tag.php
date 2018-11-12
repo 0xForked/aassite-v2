@@ -10,8 +10,8 @@ class CreateProjectTag extends AbstractMigration
         $slide = $this->table('project_tag');
         $slide->addColumn('project_id', 'integer', ['null' => true])
               ->addColumn('tag_id', 'integer', ['null' => true])
-              ->addForeignKey('project_id', 'projects', 'id', ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION'])
-              ->addForeignKey('tag_id', 'tags', 'id', ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION'])
+              ->addForeignKey('project_id', 'projects', 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
+              ->addForeignKey('tag_id', 'tags', 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
               ->save();
     }
 

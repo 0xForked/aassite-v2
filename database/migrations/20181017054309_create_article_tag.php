@@ -14,8 +14,8 @@ class CreateArticleTag extends AbstractMigration
         $slide = $this->table('article_tag');
         $slide->addColumn('article_id', 'integer', ['null' => true])
               ->addColumn('tag_id', 'integer', ['null' => true])
-              ->addForeignKey('article_id', 'articles', 'id', ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION'])
-              ->addForeignKey('tag_id', 'tags', 'id', ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION'])
+              ->addForeignKey('article_id', 'articles', 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
+              ->addForeignKey('tag_id', 'tags', 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
               ->save();
     }
 

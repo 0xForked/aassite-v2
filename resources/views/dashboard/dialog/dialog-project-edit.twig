@@ -2,9 +2,10 @@
 <div class="modal fade" id="projectEditDialog{{project.id}}" tabindex="-1" role="dialog" aria-labelledby="projectEditDialogLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-        <form method="POST" action="{{ path_for('dashboard.project.create') }}" enctype="multipart/form-data">
+        {# select picker nda jadi kalau pakai form di dalam table jadi form harus di luar table #}
+        {# <form method="POST" action="{{ path_for('dashboard.project.update') }}" enctype="multipart/form-data"> #}
             <div class="modal-header" >
-                <h5 class="modal-title" id="projectEditDialogLabel">Add new Project</h5>
+                <h5 class="modal-title" id="projectEditDialogLabel">Edit Project ({{project.id}})</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,7 +14,7 @@
                 <div class="form-group">
                     <label for="titleProject"><b>Title</b></label>
                     <p for="titleProject">Berikan judul yang mengambarkan project ini! <i class="fa fa-info-circle" style="color:firebrick" data-toggle="tooltip" data-placement="top" title="Beri judul"></i></p>
-                    <input type="text" class="form-control" name="titleProject" id="titleProject" placeholder="Title" value="{{project.title}}" required autofocus>
+                    <input type="text" class="form-control" name="titleProject" id="titleProject" placeholder="Title" required autofocus value="{{project.title}}">
                 </div>
 
                 <div class="row">
@@ -21,9 +22,16 @@
                         <div class="form-group">
                             <label for="categoryProject"><b>Category</b></label>
                             <p for="categoryProject">Pilih kategori yang tepat, untuk mempermudah penyorotan! <i class="fa fa-info-circle" style="color:firebrick" data-toggle="tooltip" data-placement="top" title="pilih category"></i></p>
-                            <select name="categoryProject[]" class="selectpicker form-control" multiple data-live-search="true" required>
+                            <select class="selectpicker" multiple data-live-search="true" data-width="100%" name="categoryProject[]" id="categoryProjectEdit">
                                 {% for category in category_list %}
-                                    <option value="{{ category.id }}" {{ category.id == 1 ? 'selected' : '' }} >{{ category.title }}</option>
+                                    <option
+                                        value="{{ category.id }}"
+                                        {# {% for category_project_list in project.category %}
+                                            {{ category.id == category_project_list.id ? 'selected' : '' }}
+                                        {% endfor %} #}
+                                    >
+                                        {{ category.title }}
+                                    </option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -32,8 +40,19 @@
                         <div class="form-group">
                             <label for="tagProject"><b>Tag</b></label>
                             <p for="tagProject">Masukkan beberapa kata kunci, untuk mempermudah penyorotan! <i class="fa fa-info-circle" style="color:firebrick" data-toggle="tooltip" data-placement="top" title="pilih tag"></i></p>
-                            <input id="tagData" style="width:350px;" type="text" name="tagProject" placeholder="Tag" required/>
-                            <div style="clear:both;"></div>
+                            <select name="tagProject[]" class="selectpicker" multiple data-selected-text-format="count > 3" data-live-search="true"  data-width="100%" data-actions-box="true">
+                                {% for tag in tag_list %}
+                                    <option
+                                        value="{{ tag.id }}"
+                                        data-content="<span class='badge badge-secondary'>{{ tag.title }}</span>"
+                                        {# {% for tag_project_list in project.tag  %}
+                                            {{ tag.id == tag_project_list.id ? 'selected' : '' }}
+                                        {% endfor %} #}
+                                    >
+                                        {{ tag.title }}
+                                    </option>
+                                {% endfor %}
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -41,50 +60,78 @@
                     <label for="descriptionProject"><b>Description</b></label>
                     <p for="descriptionProject">Deskripsikan project secara garis besar (singkat, padat, jelas)! <i class="fa fa-info-circle" style="color:firebrick" data-toggle="tooltip" data-placement="top" title="Beri deskripsi"></i></p>
                     <label for="descriptionProject"></label>
-                    <input type="text" class="form-control" id="descriptionProject" name="descriptionProject" placeholder="Description"  value="{{project.desc}}" required>
+                    <input type="text" class="form-control" id="descriptionProject" name="descriptionProject" placeholder="Description" required value="{{project.desc}}">
                 </div>
                 <div class="form-group">
                     <label for="githubLinkProject"><b>Github</b></label>
                     <p for="githubLinkProject">Masukkan link external <i>*jika ada</i> </p>
-                    <input type="text" class="form-control" id="githubLinkProject" name="githubLinkProject" placeholder="External link " >
+                    <input type="text" class="form-control" id="githubLinkProject" name="githubLinkProject" placeholder="External link " value="{{project.link_github}}">
                 </div>
                 <div class="form-group">
                     <label for="webLinkProject"><b>Web Link</b></label>
                     <p for="webLinkProject">Masukkan link external <i>*jika ada</i> </p>
-                    <input type="text" class="form-control" id="webLinkProject" name="webLinkProject" placeholder="External link " >
+                    <input type="text" class="form-control" id="webLinkProject" name="webLinkProject" placeholder="External link " value="{{project.link_url_web}}">
                 </div>
                 <div class="form-group">
                     <label for="playStoreLinkProject"><b>Play Store</b></label>
                     <p for="playStoreLinkProject">Masukkan link external <i>*jika ada</i> </p>
-                    <input type="text" class="form-control" id="playStoreLinkProject" name="playStoreLinkProject" placeholder="External link " >
+                    <input type="text" class="form-control" id="playStoreLinkProject" name="playStoreLinkProject" placeholder="External link " value="{{project.link_store_google}}">
                 </div>
                 <div class="form-group">
                     <label for="appStoreLinkProject"><b>App Store</b></label>
                     <p for="appStoreLinkProject">Masukkan link external <i>*jika ada</i> </p>
-                    <input type="text" class="form-control" id="appStoreLinkProject" name="appStoreLinkProject" placeholder="External link " >
+                    <input type="text" class="form-control" id="appStoreLinkProject" name="appStoreLinkProject" placeholder="External link " value="{{project.link_store_apple}}">
                 </div>
                 <div class="form-group">
                     <label for="userGuideLinkProject"><b>User Guide</b></label>
                     <p for="userGuideLinkProject">Masukkan link external <i>*jika ada</i> </p>
-                    <input type="text" class="form-control" id="userGuideLinkProject" name="userGuideLinkProject" placeholder="External link " >
+                    <input type="text" class="form-control" id="userGuideLinkProject" name="userGuideLinkProject" placeholder="External link " value="{{project.user_guide}}">
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-8">
                         <label for="projectLogo"><b>Logo</b></label>
-                        <p for="projectLogo">Tambahkan logo project <i>*jika ada</i></p>
-                        <label for="projectLogo" class="text-center">
-                            <input type="file" name="projectLogo" id="projectLogo" style="display:none;" onchange="readIMG01(this);"/>
-                            <img id="img01" name="img01" src="{{ base_url() }}/assets/img/add-img.svg"  class="img-thumbnail rounded" width="200px" height="200px"/>
-                        </label>
+                        <p for="projectLogo">Tambahkan logo project <i>*jika ada</i> <i class="fa fa-info-circle" style="color:firebrick" data-toggle="tooltip" data-placement="top" title="Upload dari komputer atau pilih dari gallery"></i></p>
+
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-gallery-tab" data-toggle="pill" href="#pills-gallery" role="tab" aria-controls="pills-gallery" aria-selected="true">Gallery</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-upload-tab" data-toggle="pill" href="#pills-upload" role="tab" aria-controls="pills-upload" aria-selected="false">Upload</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade  show active" id="pills-gallery" role="tabpanel" aria-labelledby="pills-gallery-tab">
+                                <select class="image-picker show-html" style="display:none;" name="logoFromGallery" >
+                                    {% for gallery in gallery_list %}
+                                        <option
+                                            data-img-src='{{ base_url() }}/assets/img/upload/{{ gallery.name }}'
+                                            value='{{ gallery.id }}'
+                                            {# {% for gallery_project_list in project.gallery  %}
+                                                {{ gallery.id  == gallery_project_list.id ? 'selected' : '' }}
+                                            {% endfor %} #}
+                                        >
+                                            {{ gallery.name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="tab-pane fade text-center" id="pills-upload" role="tabpanel" aria-labelledby="pills-upload-tab">
+                                <label for="projectLogo">
+                                    <input type="file" name="projectLogo" id="projectLogo" style="display:none;" onchange="readIMG01(this);"/>
+                                    <img id="img01" name="img01" src="{{ base_url() }}/assets/img/add-img.svg"  class="img-thumbnail rounded" width="270px" height="270px"/>
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="form-group">
                             <label for="statusProject"><b>Status</b></label>
                             <p for="statusProject">Pilih status kontent baru ini! <i class="fa fa-info-circle" style="color:firebrick" data-toggle="tooltip" data-placement="top" title="Draft, Publish, Featured"></i></p>
                             <select class="form-control" id="statusProject" name="statusProject">
-                                <option value="0">Draft</option>
-                                <option value="1">Publish</option>
-                                <option value="2">Featured</option>
+                                <option value="0" {{ project.status == 0 ? 'selected' : '' }}>Draft</option>
+                                <option value="1" {{ project.status == 1 ? 'selected' : '' }}>Publish</option>
+                                <option value="2" {{ project.status == 2 ? 'selected' : '' }}>Featured</option>
                             </select>
                         </div>
                     </div>
@@ -92,11 +139,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary">Update</button>
                 <input type="hidden" name="author" id="author" value="{{ auth.user.id }}" />
+                <input type="hidden" name="id" id="id" value="{{project.id }}" />
                 {{ csrf.field | raw }}
             </div>
-        </form>
+        {# </form> #}
     </div>
   </div>
 </div>

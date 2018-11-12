@@ -13,8 +13,8 @@ class CreateCategoryDiscussion extends AbstractMigration
         $slide = $this->table('category_discussion');
         $slide->addColumn('discussion_id', 'integer', ['null' => true])
               ->addColumn('category_id', 'integer', ['null' => true])
-              ->addForeignKey('discussion_id', 'discussions', 'id', ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION'])
-              ->addForeignKey('category_id', 'categories', 'id', ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION'])
+              ->addForeignKey('discussion_id', 'discussions', 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
+              ->addForeignKey('category_id', 'categories', 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
               ->save();
     }
 
